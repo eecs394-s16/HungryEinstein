@@ -1,0 +1,26 @@
+{
+  "preloads": [],
+  "tabs": [
+    {
+      "position": 0,
+      "id": "home",
+      "title": "Home",
+      "target_url": "http://localhost/app/main/home.html"
+    },
+    {
+      "position": 1,
+      "id": "messages",
+      "title": "Messages",
+      "target_url": "http://localhost/app/main/messages.html"
+    },
+    {
+      "position": 2,
+      "id": "schedule",
+      "title": "Schedule",
+      "target_url": "http://localhost/app/main/schedule.html"
+    }
+  ],
+  "configuration": {
+    "extra_response_headers": {}
+  }
+}
