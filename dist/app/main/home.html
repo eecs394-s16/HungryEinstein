@@ -23,23 +23,49 @@
   <script src="/components/supersonic/supersonic.js"></script>
   <script src="/components/webcomponentsjs/webcomponents.js"></script>
 
+  <!-- firebase dependencies -->
+  <script src="/components/firebase/firebase.js"></script>
+  <script src="/components/angularfire/dist/angularfire.min.js"></script>
+
   
   <script src="/app/common.js"></script>
   
   <script src="/app/main.js"></script>
   
+  
 </head>
 <body ng-app="main">
 
-<div class="padding">
+<div class="row" ng-controller="home_controller">
 
   <super-navbar>
     <super-navbar-title>
-      Welcome to Supersonic!
+      Home
     </super-navbar-title>
   </super-navbar>
 
-home
+
+ <div class ="col-md-5">
+   <h3> Add Request</h3>
+   <form ng-submit="addRequest()">
+     <div class ="form-group">
+       <label>Name</label>
+       <input type ="text" class ="form-control" ng-model="name" placeholder="Name">
+     </div>
+     
+     <div class ="form-group">
+       <label>Subject</label>
+       <input type ="text" class ="form-control" ng-model="subject" placeholder="Subject you want to be tutored in">
+     </div>
+     
+     <div class ="form-group">
+       <label>Date of expiration</label>
+       <input type ="text" class ="form-control" ng-model="expiry" placeholder="Date of expiration">
+     </div>
+
+     <button type ="submit" class ="btn btn-default">Submit Request</button>
+   </form>
+ 
 
 </div>
 

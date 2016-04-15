@@ -1,18 +1,31 @@
-angular.module('example', [
+angular.module('main', [
   // Declare here all AngularJS dependencies that are shared by the example module.
-  'supersonic'
+  'supersonic', 'firebase'
 ]);
-
+	
 angular
-  .module('example')
-  .controller('LearnMoreController', function($scope, supersonic) {
+  .module('main')
+  .controller('home_controller', function($scope, supersonic, $firebaseArray) {
+	var ref = new Firebase("https://hungryeinstein.firebaseio.com/");
 
-    $scope.navbarTitle = "Learn More";
+	$scope.requests = $firebaseArray(ref);
 
+	$scope.addRequest = function(){
+	   console.log('Adding Request');
+	   $scope.requests.$add({
+	       name: $scope.name,
+	       subject: $scope.subject,
+	       expiry: $scope.expiry
+	   }).then(function(ref){
+	       var id = ref.key();
+	       console.log("Added Request" + id);
+	       $scope.name =" ";
+	       $scope.subject =" ";
+	       $scope.expiry =" ";
+	   });
+	}
   });
 
-angular
-  .module('example')
-  .controller('SettingsController', function($scope, supersonic) {
-    $scope.navbarTitle = "Settings";
-  });
+
+
+

@@ -16,9 +16,14 @@
   <script src="/components/supersonic/supersonic.js"></script>
   <script src="/components/webcomponentsjs/webcomponents.js"></script>
 
+  <!-- firebase dependencies -->
+  <script src="/components/firebase/firebase.js"></script>
+  <script src="/components/angularfire/dist/angularfire.min.js"></script>
+
   <% _.each(yield.modules, function(module) { %>
   <script src="/app/<%= module %>.js"></script>
   <% }); %>
+  
 </head>
 <body ng-app="<%= yield.moduleName %>">
 
