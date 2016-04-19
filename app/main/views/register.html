@@ -1,12 +1,20 @@
-<div class="card register" ng-controller="home_controller">
+<div class = "padding-vertical" ng-controller="home_controller">
+   <super-navbar>
+    <super-navbar-title>
+      Register
+    </super-navbar-title>
+  </super-navbar>
+
+<div class = "padding-vertical" ng-controller="home_controller">
   <form name="myform"
    ng-submit = "register()"
    novalidate>
 
     <div class="textintro">
-      <h1>Register</h1>
-      <p>To access site features</p>
-      <p ng-show="message">{{message}}</p>
+      <center>
+        <h2 class = "padding-vertical">Register a new account</h2>
+        <p ng-show="message">{{message}}</p>
+      </center>
     </div>
 
     <fieldset>
@@ -20,7 +28,17 @@
       ng-required="true">
     </fieldset>
     
-    <button type="submit" class="btn" ng-disabled="myform.$invalid">Register</button>
-    <p>or <a ng-href="login.html">login</a></p>
+    <button type="submit" class="button button-full button-positive" ng-disabled="myform.$invalid">Register</button>
+
+    <center>
+        <h3> or </h3>
+    </center>
+
+
+    <super-navigate location="main#login">
+     <button  class="button button-full button-calm">Go back to login</button>
+     </super-navigate>
+
+
   </form>
 </div>
