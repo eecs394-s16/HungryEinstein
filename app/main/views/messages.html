@@ -7,10 +7,12 @@
 	</super-navbar>
 
 	<ul class="list">
-		{{mything}}
+		<li class="item" ng-repeat="item in messages">
+	    	{{item.name}} >> {{item.message}}
+	    </li>
 	</ul>
 
-    <form ng-submit="addRequest()">
+    <form ng-submit="addMessage()">
     	<div class ="form-group">
 			<input type='text' class="form-control" ng-model="name" placeholder="name">
 		</div>
