@@ -1,32 +1,22 @@
-<div class="row" ng-controller="home_controller">
+<div ng-controller="home_controller">
+	<super-navbar>
+	  <super-navbar-title>
+	    Home
+	  </super-navbar-title>
+	  <super-navbar-button ng-click="logout()" side = "right">Logout
+	  </super-navbar-button>
+	</super-navbar>
 
-  <super-navbar>
-    <super-navbar-title>
-      Home
-    </super-navbar-title>
-  </super-navbar>
+    {{currentUser.firstname}}
+    home
+    <!-- {{message}} -->
 
-
- <div class ="col-md-5">
-   <h3> Add Request</h3>
-   <form ng-submit="addRequest()">
-     <div class ="form-group">
-       <label>Name</label>
-       <input type ="text" class ="form-control" ng-model="name" placeholder="Name">
-     </div>
-     
-     <div class ="form-group">
-       <label>Subject</label>
-       <input type ="text" class ="form-control" ng-model="subject" placeholder="Subject you want to be tutored in">
-     </div>
-     
-     <div class ="form-group">
-       <label>Date of expiration</label>
-       <input type ="text" class ="form-control" ng-model="expiry" placeholder="Date of expiration">
-     </div>
-
-     <button type ="submit" class ="btn btn-default">Submit Request</button>
-   </form>
- 
-
+    <!-- {{message}} logout information-->
+    <form class = "formgroup" name="requestform" ng-submit="addRequest()" novalidate>
+    	<div>
+	    	<input type="text" ng-required="true" placeholder="food" ng-model="requestfood">    		
+    	</div>
+    	<button type="submit" ng-disabled="requestform.$invalid">+</button>
+    </form>
+	
 </div>
