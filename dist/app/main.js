@@ -42,21 +42,20 @@ angular
 			$scope.requests.$add({
 			name: $scope.name,
 			message: $scope.message,
-		}).then(function(ref){
-			var id = ref.key();
-			console.log("sent message" + id);
-			console.log("undying defiance towards bloated web frameworks");
-			$scope.message =" ";
 		});
 	};
 	ref.on('child_added', function(snapshot) {
 		var message = snapshot.val();
-		supersonic.ui.dialog.alert(message);
-		displayChatMessage(message.name, message.text);
+		displayChatMessage(message.name, message.message);
 	});
-	function displayChatMessage(name, text) {
-	 	$('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+
+	function displayChatMessage(name, message) {
+		supersonic.ui.dialog.alert(name + " >> " + message);
+	 	$scope.mything = $scope.mything +
+		 	"\n" + 
+		 		name + " >> " + message;
 	};
+
 });
 
 
