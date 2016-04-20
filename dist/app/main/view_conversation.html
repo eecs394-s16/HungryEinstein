@@ -11,7 +11,7 @@
   <meta charset="utf8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <title>messages</title>
+  <title>view_conversation</title>
 
   <link rel="stylesheet" href="/components/supersonic/css/supersonic.css" />
   <link rel="stylesheet" href="/app/common/stylesheets/application.css" />
@@ -36,11 +36,11 @@
 </head>
 <body ng-app="main">
 
-<div ng-controller="messages_controller">
+<div ng-controller="view_conversation_controller">
 
 	<super-navbar>
-		<super-navbar-title>
-			Conversations
+		<super-navbar-title ng-model="passedData">
+			Conversation with {{passedData.receiver}}
 		</super-navbar-title>
 	</super-navbar>
 

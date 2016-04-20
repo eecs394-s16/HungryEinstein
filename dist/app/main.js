@@ -40,8 +40,10 @@ angular
 	$scope.addMessage = function(){
 		console.log('Sending Message');
 		$scope.messages.$add({
-			name: $scope.name,
-			message: $scope.message,
+			sendID: $scope.sendID,
+			rcID: $scope.rcID,
+			text: $scope.text,
+			time: Firebase.ServerValue.TIMESTAMP,
 		});
 	};
 	ref.on('child_added', function() {
@@ -52,33 +54,56 @@ angular
 		$scope.messages = $firebaseArray(ref);
 	}
 
+	// when a conversation is selected,
+	// show that conversation
+	$scope.viewConversation = function(from, to, time){
+		steroids.logger.log("from: " + String(from) + ", to: " + String(to) + ", time: " + String(time));
+
+		var infoForView = {sender: from, receiver: to};
+		var view = new supersonic.ui.View("main#view_conversation");
+		supersonic.ui.layers.push(view, {params: infoForView});
+		// opening views with options
+		// http://docs.appgyver.com/supersonic/api-reference/stable/supersonic/ui/layers/push/
+	}
+
 });
 
 
-// Ariana's Code
-
-// main.factory('Authentication',
-//     ['$rootScope', '$firebaseAuth', 'FIREBASE_URL', '$location', '$firebaseObject', 'supersonic',
-//     function($rootScope, $firebaseAuth, FIREBASE_URL, $location, $firebaseObject, supersonic){
-
-        // var ref = new Firebase(FIREBASE_URL);
-        // var auth = $firebaseAuth(ref);
-//         // var temp_auth;           
-//        // successfully login and extract login user's infomation
-//         auth.$onAuth(function(authUser){
-//             if (authUser){
-//                 temp_auth = authUser;
-//                 var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
-//                 var userObj = $firebaseObject(authRef);
-//                 // $rootScope.messages =
-                
-//                 $rootScope.currentUser = userObj;
 
 
-//             } else {
-//                 $rootScope.currentUser = '';
-//             }
-//         });
+
+angular
+.module('main')
+.controller('view_conversation_controller', function($scope, supersonic, $firebaseArray) {
+	var ref = new Firebase("https://hungryeinstein.firebaseio.com/messages");
+
+	updateMessages();
+
+	var passedData = {};
+	supersonic.ui.views.current.params.onValue(function(data){
+		passedData = data;
+	})
+
+	$scope.addMessage = function(){
+		console.log('Sending Message');
+		$scope.messages.$add({
+			sendID: $scope.sendID,
+			rcID: $scope.rcID,
+			text: $scope.text,
+			time: Firebase.ServerValue.TIMESTAMP,
+		});
+	};
+	ref.on('child_added', function() {
+		updateMessages();
+	});
+
+	function updateMessages(){
+		$scope.messages = $firebaseArray(ref);
+	}
+
+
+
+});
 
 
 
