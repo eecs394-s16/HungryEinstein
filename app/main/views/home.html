@@ -14,6 +14,7 @@
       </center>
     </div>
 
+     <!-- search input-->
     <div class = "item item-input item-stacked-label"> 
     	<div class="card">
     		<label class="item item-input">
@@ -22,8 +23,8 @@
     		</label>
     	</div>
     </div>
-  
 
+    <!--Cards (still in sandbox at the moment) -->
   <ul class="list" ng-hide="requestss.length == 0">
 
       <super-navigate location="requests#show" data-params-id="{{ requests.id }}" ng-repeat="requests in requestss | orderBy: artistOrder: direction | filter: query ">
@@ -38,16 +39,16 @@
       No requests found. Create one?
     </h4>
 
-    <super-modal-show location="requests#new">
+    <!--<super-modal-show location="requests#new"> -->
       <button class="button button-block button-positive">
         Find a Tutor
       </button>
-    </super-modal-show>
+   <!-- </super-modal-show> -->
 
-    <super-modal-show location="requests#notify">
+    <!--<super-modal-show location="requests#notify"> -->
       <button class="button button-full button-clear button-positive">
       </button>
-    </super-modal-show>
+    <!--</super-modal-show>-->
 
   </div>
     <!-- {{message}} -->
