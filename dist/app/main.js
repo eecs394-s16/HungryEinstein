@@ -500,6 +500,7 @@ angular
 		});
 	}
 })
+
  main.controller('home_controller',
 	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
 	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
