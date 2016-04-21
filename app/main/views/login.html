@@ -1,0 +1,47 @@
+<div class = "padding-vertical" ng-controller="home_controller">
+   <super-navbar>
+    <super-navbar-title>
+      Welcome to Hungy Einstein!
+    </super-navbar-title>
+  </super-navbar>
+  
+  <form class = "padding-vertical" name="myform" ng-submit = "login()" novalidate>
+    <div>
+      <center>
+        <h1 class = "padding-vertical">Welcome to Hungry Einstien!</h1>
+        <p> Hungry Einstien is an easy and casual way to get some food in exchange for tutoring your fellow students! </p>
+        <p>Log-in to access the awesomeness!</p>
+        <p ng-show="message">{{message}}</p>
+      </center>
+    </div>
+
+    <fieldset class = "padding-vertical">
+      <input class = "padding-vertical" type="email" name="email" placeholder="Email" ng-model="user.email" ng-required = "true">
+      <p class = "error validationerror" ng-show="myform.email.$invalid && myform.email.$touched">
+        Must be a valid email address!
+      </p>
+      <input type="password" name="password" placeholder="Password" ng-model="user.password" ng-required = "true">
+      <p class = "error validationerror" ng-show="myform.password.$invalid && myform.password.$touched">
+        Must be a password!
+      </p>
+    </fieldset>
+    
+    <!-- <span ng-repeat="item in userinfo">{{item.text}}</span> -->
+<!--     <ul>
+      <li ng-repeat="(key, message) in messages">{{message.firstname}}</li>
+    </ul> -->
+    <button type="submit" class="button button-full button-positive" ng-disabled="myform.$invalid">Login</button>
+
+    <center>
+        <h3> or </h3>
+    </center>
+
+
+    <super-navigate location="main#register">
+     <button  class="button button-full button-calm">Register</button>
+    </super-navigate>
+
+     
+  
+</div>
+

@@ -36,6 +36,7 @@
 </head>
 <body ng-app="main">
 
+<<<<<<< HEAD
 <div class="row" ng-controller="home_controller">
 
   <super-navbar>
@@ -66,6 +67,71 @@
       <button type ="submit" class ="btn btn-default">Submit Request</button>
     </form>
   </div>
+=======
+<div ng-controller="home_controller">
+	<super-navbar>
+	  <super-navbar-title>
+	    Home
+	  </super-navbar-title>
+	  <super-navbar-button ng-click="logout()" side = "right">Logout
+	  </super-navbar-button>
+	</super-navbar>
+
+	<div class="textintro">
+      <center>
+        <h1 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h1>
+        <h2 class = "padding-vertical" >Here are the current listings: </h2>
+      </center>
+    </div>
+
+     <!-- search input-->
+    <div class = "item item-input item-stacked-label"> 
+    	<div class="card">
+    		<label class="item item-input">
+    			<i class="icon super-search placeholder-icon"></i>
+    			<input ng-model="query" placeholder=" Type either a food or subject" autofocus>
+    		</label>
+    	</div>
+    </div>
+
+    <!--Cards (still in sandbox at the moment) -->
+  <ul class="list" ng-hide="requestss.length == 0">
+
+      <super-navigate location="requests#show" data-params-id="{{ requests.id }}" ng-repeat="requests in requestss | orderBy: artistOrder: direction | filter: query ">
+        <li class="item item-icon-right">
+          <span ng-bind="requests['Subject']  + ' for ' + requests['Food']"></span>
+          <i class="icon super-ios-arrow-right"></i>
+        </li>
+      </super-navigate>
+    </ul>
+
+    <h4 ng-show="requestss.length == 0" class="assertive padding">
+      No requests found. Create one?
+    </h4>
+
+    <!--<super-modal-show location="requests#new"> -->
+      <button class="button button-block button-positive">
+        Find a Tutor
+      </button>
+   <!-- </super-modal-show> -->
+
+    <!--<super-modal-show location="requests#notify"> -->
+      <button class="button button-full button-clear button-positive">
+      </button>
+    <!--</super-modal-show>-->
+
+  </div>
+    <!-- {{message}} -->
+
+    <!-- {{message}} logout information-->
+    <form class = "formgroup" name="requestform" ng-submit="addRequest()" novalidate>
+    	<div>
+	    	<input type="text" ng-required="true" placeholder="food" ng-model="requestfood">    		
+    	</div>
+    	<button type="submit" ng-disabled="requestform.$invalid">+</button>
+    </form>
+	
+>>>>>>> login
 </div>
 
 

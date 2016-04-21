@@ -1,5 +1,9 @@
 {
   "preloads": [],
+  "initialView": {
+    "id": "initialView",
+    "location": "http://localhost/app/main/login.html"
+  },
   "tabs": [
     {
       "position": 0,
