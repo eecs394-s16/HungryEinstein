@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 angular
 .module('main')
 .controller('home_controller', function($scope, supersonic, $firebaseArray) {
@@ -20,8 +19,7 @@ angular
 			$scope.expiry =" ";
 		});
 	}
-});
-=======
+})
  main.controller('home_controller',
 	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
 	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
@@ -49,7 +47,7 @@ angular
 		};
 
 }]);
->>>>>>> login
+
 
 
 
