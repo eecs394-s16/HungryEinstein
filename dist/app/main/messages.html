@@ -36,7 +36,15 @@
 </head>
 <body ng-app="main">
 
+
 <div ng-controller="messages_controller">
+
+<super-navbar >
+  <super-navbar-title>
+    Using the Scanner
+  </super-navbar-title>
+</super-navbar>
+
 
 	<super-navbar>
 		<super-navbar-title>
@@ -44,10 +52,11 @@
 		</super-navbar-title>
 	</super-navbar>
 
+
 	<ul class="list">
-		<li class="item" ng-repeat="item in messages | filter:convoFilter" ng-click="viewConversation(item)">
-			<i class="super-android-person"></i>
-			{{getTitle(item)}}
+		<li class="item item-avatar" ng-repeat="item in messages | filter:convoFilter" ng-click="viewConversation(item)">
+			<img src="einstein.png">
+			<h2>{{getTitle(item)}}</h2>
 		</li>
 	</ul>
 

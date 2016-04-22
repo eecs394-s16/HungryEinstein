@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+  window.addEventListener('WebComponentsReady', function() {
+    supersonic.app.splashscreen.hide();
+  });
+  </script>
+  <!-- Cloud resource definition file for Supersonic Data -->
+  <script src="/cloud-resources.js"></script>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <title>login</title>
+
+  <link rel="stylesheet" href="/components/supersonic/css/supersonic.css" />
+  <link rel="stylesheet" href="/app/common/stylesheets/application.css" />
+  <link rel="import" href="/components/supersonic/components/import.html">
+
+  <script src="http://localhost/cordova.js"></script>
+  <script src="/components/steroids-js/steroids.js"></script>
+  <script src="/components/angular/angular.js"></script>
+  <script src="/components/supersonic/supersonic.js"></script>
+  <script src="/components/webcomponentsjs/webcomponents.js"></script>
+
+  <!-- firebase dependencies -->
+  <script src="/components/firebase/firebase.js"></script>
+  <script src="/components/angularfire/dist/angularfire.min.js"></script>
+
+  
+  <script src="/app/common.js"></script>
+  
+  <script src="/app/main.js"></script>
+  
+  
+</head>
+<body ng-app="main">
+
+<div class = "padding-vertical" ng-controller="home_controller">
+	 <super-navbar>
+		<super-navbar-title>
+			Welcome to Hungy Einstein!
+		</super-navbar-title>
+	</super-navbar>
+	
+	<form class = "padding-vertical" name="myform" ng-submit = "login()" novalidate>
+		<div>
+			<center>
+				<h1 class = "padding-vertical">Welcome to Hungry Einstien!</h1>
+				<p> Hungry Einstien is an easy and casual way to get some food in exchange for tutoring your fellow students! </p>
+				<p>Log-in to access the awesomeness!</p>
+				<p ng-show="message">{{message}}</p>
+			</center>
+		</div>
+
+		<fieldset class = "padding-vertical">
+			<input class = "padding-vertical" type="email" name="email" placeholder="Email" ng-model="user.email" ng-required = "true">
+			<p class = "error validationerror" ng-show="myform.email.$invalid && myform.email.$touched">
+				Must be a valid email address!
+			</p>
+			<input type="password" name="password" placeholder="Password" ng-model="user.password" ng-required = "true">
+			<p class = "error validationerror" ng-show="myform.password.$invalid && myform.password.$touched">
+				Must be a password!
+			</p>
+		</fieldset>
+		<button type="submit" class="button button-full button-positive" ng-disabled="myform.$invalid">Login</button>
+
+		<center>
+				<h3> or </h3>
+		</center>
+
+
+		<super-navigate location="main#register">
+		 <button  class="button button-full button-calm">Register</button>
+		</super-navigate>
+
+<!-- facebook -->
+<script>
+//the script to use 
+var ref = new Firebase("https://hungryeinstein.firebaseio.com");
+function login(){
+ref.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    // the access token will allow us to make Open Graph API calls
+    console.log(authData.facebook.accessToken);
+  }
+}, {
+  scope: "email,user_likes" // the permissions requested
+});
+}
+</script>
+
+<center>
+        <h3> or </h3>
+    </center>
+
+<button  class="button button-full button-calm" onclick="login();">Login using Facebook</button>
+
+
+
+
+</div>
+
+
+
+</body>
+</html>
