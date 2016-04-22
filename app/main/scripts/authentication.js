@@ -39,7 +39,7 @@ main.factory('Authentication',
 						date: Firebase.ServerValue.TIMESTAMP
 					}).then(function(){
 						$scope.requestfood = '';
-						$scope.message = "add successfully!";zz
+						$scope.message = "add successfully!";
 					}); 
 			},
 

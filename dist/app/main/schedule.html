@@ -36,7 +36,7 @@
 </head>
 <body ng-app="main">
 
-<div class="padding" ng-controller="SettingsController">
+<div class="padding" ng-controller="schedule_controller">
 
   <super-navbar>
     <super-navbar-title>
@@ -44,24 +44,36 @@
     </super-navbar-title>
   </super-navbar>
 
-<h3><center>Hey Tony! This is your schedule.</center></h3>
+<h3><center>Hey {{currentUser.firstname}}! This is your schedule.</center></h3>
+
+
+<ul>
+  <li ng-repeat = "request in req">{{ request.text }}: {{ request.time }} </li>
+</ul>
+
+<!-- <h3><center>Hey {{currentRequest}}! This is your schedule.</center></h3> -->
+
 <!-- Change "Tony" to the database name -->
 
 <div class="card">
   <div class="item item-text-wrap">
   	<!-- Pull info from database -->
     Monday, June 12th. EECS 111. Main Library. <br>
-    <button class="button button-small button-stable">
-  Cancel
-  <!-- Add functionality to the cancel button -->
-</button>
+    <button ng-click="cancel()" class="button button-block button-negative">
+        Cancel
+    </button>
   </div>
+
     <div class="item item-text-wrap">
     Tuesday, June 13th. EECS 394. South Campus.<br>
-    <button class="button button-small button-stable">
-  Cancel
-  <!-- Add functionality to the cancel button -->
-</button>
+    <button ng-click="cancel()" class="button button-block button-negative">
+        Cancel
+    </button>
+
+    <button ng-click="NEEDTOIMPLEMENT()" class="button button-block button-negative">
+        Tutor
+    </button>
+
   </div>
   </div>
 </div>

@@ -17,7 +17,7 @@ module.exports =
     {
       title: "Schedule"
       id: "schedule"
-      location: "main#schedule"
+      location: "main#newRequest"
     }
   ]
 

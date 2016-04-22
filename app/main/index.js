@@ -1,7 +1,7 @@
 var main = angular.module('main', [
   // Declare here all AngularJS dependencies that are shared by the example module.
   'supersonic', 'firebase', 'ngRoute'
-]).constant('FIREBASE_URL', "https://hung0413.firebaseio.com/");
+]).constant('FIREBASE_URL', "https://hungryeinstein.firebaseio.com/");
 
 // main.config(['$routeProvider', function($routeProvider){
 // 	$routeProvider.

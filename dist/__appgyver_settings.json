@@ -21,7 +21,7 @@
       "position": 2,
       "id": "schedule",
       "title": "Schedule",
-      "target_url": "http://localhost/app/main/schedule.html"
+      "target_url": "http://localhost/app/main/newRequest.html"
     }
   ],
   "configuration": {

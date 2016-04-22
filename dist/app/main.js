@@ -1,7 +1,7 @@
 var main = angular.module('main', [
   // Declare here all AngularJS dependencies that are shared by the example module.
   'supersonic', 'firebase', 'ngRoute'
-]).constant('FIREBASE_URL', "https://hung0413.firebaseio.com/");
+]).constant('FIREBASE_URL', "https://hungryeinstein.firebaseio.com/");
 
 // main.config(['$routeProvider', function($routeProvider){
 // 	$routeProvider.
@@ -429,7 +429,7 @@ main.factory('Authentication',
 						date: Firebase.ServerValue.TIMESTAMP
 					}).then(function(){
 						$scope.requestfood = '';
-						$scope.message = "add successfully!";zz
+						$scope.message = "add successfully!";
 					}); 
 			},
 
@@ -480,26 +480,6 @@ main.factory('Authentication',
 }]); //factory
 angular
 .module('main')
-.controller('home_controller', function($scope, supersonic, $firebaseArray) {
-	var ref = new Firebase("https://hungryeinstein.firebaseio.com/");
-
-	$scope.requests = $firebaseArray(ref);
-
-	$scope.addRequest = function(){
-		console.log('Adding Request');
-		$scope.requests.$add({
-			name: $scope.name,
-			subject: $scope.subject,
-			expiry: $scope.expiry
-		}).then(function(ref){
-			var id = ref.key();
-			console.log("Added Request" + id);
-			$scope.name =" ";
-			$scope.subject =" ";
-			$scope.expiry =" ";
-		});
-	}
-})
 
  main.controller('home_controller',
 	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
@@ -533,7 +513,28 @@ angular
 
 
 
+// .controller('home_controller', function($scope, supersonic, $firebaseArray) {
+// 	var ref = new Firebase("https://hungryeinstein.firebaseio.com/");
 
+// 	$scope.requests = $firebaseArray(ref);
+// 	alert("hi");
+// 	$scope.myDate = new Date("Fri Apr 21 2017 00:00:00 GMT-0500 (CDT)");
+// 	alert($scope.myDate.getDay());
+// 	$scope.addRequest = function(){
+// 		console.log('Adding Request');
+// 		$scope.requests.$add({
+// 			name: $scope.name,
+// 			subject: $scope.subject,
+// 			expiry: $scope.expiry
+// 		}).then(function(ref){
+// 			var id = ref.key();
+// 			console.log("Added Request" + id);
+// 			$scope.name =" ";
+// 			$scope.subject =" ";
+// 			$scope.expiry =" ";
+// 		});
+// 	}
+// })
 angular
 .module('main')
 .controller('messages_controller', function($scope, supersonic, $firebaseArray) {
@@ -642,3 +643,155 @@ angular
 // main.controller('request_controller', ['$scope', function($scope){
 	
 // }]);
+angular
+.module('main')
+.controller('schedule_controller',
+	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
+	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
+
+		$scope.currentRequest = steroids.views.params.id
+		
+		var ref = new Firebase("https://hungryeinstein.firebaseio.com/requests");
+
+		$scope.req = $firebaseArray(ref);
+
+		$scope.desiredRequest = req.child(currentUser.id)
+
+		$scope.date = desiredRequest.expiry
+
+
+
+		// var query = ref.orderByChild("timestamp")
+
+		// $scope.filteredRequests = $firebaseArray(query)
+
+
+
+
+		$scope.cancel = function () {
+			req.find($scope.currentRequest).then(function(request) {
+
+				$scope.$apply( function () {
+					request.accepted = false
+        			$scope.showSpinner = false;
+        			request.save().then( function() {
+        				supersonic.ui.layers.pop();
+        			});
+
+        		});
+     });
+
+
+   }
+		
+
+}]);
+
+ angular
+.module('main')
+.controller('tutorRequest_controller', function($scope, supersonic, $firebaseArray, $rootScope) {
+  
+
+  var ref = new Firebase("https://hungryeinstein.firebaseio.com/requests");
+
+  updateRequest();
+
+  // $scope.message = $rootScope.currentUser.firstname;
+
+  // $scope.message = "Calling controller";
+
+  $scope.addRequest = function(){
+    console.log('Sending Message');
+    $scope.requests.$add({
+      name: $scope.name,
+      date: $scope.date.toString(),
+      subject: $scope.subject,
+      location: $scope.location_tutor,
+      accepted: false,
+      // userID: $rootScope.currentUser.firstname,
+      tutorID: 0
+    });
+  };
+
+  ref.on('child_added', function() {
+    updateRequest();
+  });
+
+  function updateRequest(){
+    $scope.requests = $firebaseArray(ref);
+  }
+
+});
+
+
+
+
+
+// angular
+// .module('main')
+// .controller('tutorRequest_controller', 
+//   ['$scope','$firebaseArray','supersonic',
+// 	// ['$scope', '$rootScope','$firebaseAuth', 'FIREBASE_URL', '$firebaseArray', '$firebaseObject', 'supersonic', 'Authentication',
+// 	function($scope, $firebaseArray, supersonic) {
+	
+//   var ref = new Firebase("https://hungryeinstein.firebaseio.com/" + 'requests/');
+//     $scope.message = "link ok ";
+
+//   var requestInfo = $firebaseArray(ref);
+
+ 
+//   // updateRequest();
+
+//   $scope.addRequest = function(){
+//     // console.log('Sending Message');
+//     $scope.message = "go into add ";
+//     requestInfo.$add({
+//       // name: $scope.name,
+//       // date_tutor: $scope.date.toString(),
+//       // subject: $scope.subject,
+//       // food: $scope.food,
+//       // location: $scope.location_tutor,
+//       // // accepted: false,
+//       // // userID: currentUser.$id,
+//       // // tutorID: null
+//     }).then(function(ref){
+//       var id = ref.key();
+//       $scope.name =" ";
+//       $scope.subject =" ";
+//     });
+//   };
+
+//   // ref.on('child_added', function() {
+//   //   updateRequest();
+//   // });
+
+
+//   // function updateRequest(){
+//   //   var request = $firebaseArray(ref);
+//   //   $scope.message = "go into update ";
+//   // }
+	
+//   // var sync = $firebase(ref);
+//   // $scope.projects = sync.$asArray();
+
+//   // $scope.addMessage = function(data) {
+//   //  $scope.projects.$add({data: data});
+//   // }
+
+// 	// $scope.addRequest = function () {
+//  //    var name = $scope.name.trim();
+//  //    var subject = $scope.subject.trim();
+//  //    var expiry = $scope.expiry.trim();
+
+//  //    $scope.projects.$add({
+//  //      nm: name,
+//  //      sbjt: subject,
+//  //      expry: expiry
+//  //    });
+
+//  //    $scope.name = '';
+//  //    $scope.subject = '';
+//  //    $scope.expiry = '';
+//  //  };
+
+// });
