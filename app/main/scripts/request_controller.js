@@ -45,7 +45,7 @@ main.controller('request_controller',
 		            date: Firebase.ServerValue.TIMESTAMP,
 		            accepted: false,
 					userID: authUser.uid,
-					tutorID: 0
+					tutorID: ''
 				}).then(function(){
 					$scope.message = "add request successfully!";
 				    $scope.requester_name= '';

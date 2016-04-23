@@ -15,7 +15,7 @@ main.controller('home_controller',
             var refRequest = new Firebase(FIREBASE_URL + 'requests/');
             var allRequests = $firebaseArray(refRequest);
             // var requestsNum = 0;
-			var requestUnaccepted = [];
+		var requestUnaccepted = [];
             var requestUnacceptedKey = [];
             // $scope.message  = "nope!";
 	
@@ -41,13 +41,16 @@ main.controller('home_controller',
             $scope.allRequests = allRequests;
     //         // // $scope.requestsAll = allRequests;
             $scope.accept = function(index){
+
             	var firebID = requestUnacceptedKey[index];
 
             	var record = allRequests.$getRecord(firebID);
             	record.accepted = true;
+                  record.tutorID = $rootScope.currentUser.$id;
+                  // $scope.message = $rootScope.currentUser.$id;
 
             	allRequests.$save(record).then(function(){
-   
+                        $scope.message = "go accepted";
             		requestUnacceptedKey.splice(index, 1);
             	});
 
