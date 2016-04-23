@@ -1,6 +1,4 @@
-angular
-.module('main')
-.controller('schedule_controller',
+main.controller('schedule_controller',
 	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
 	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
 

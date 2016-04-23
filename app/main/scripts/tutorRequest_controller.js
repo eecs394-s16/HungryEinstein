@@ -1,6 +1,4 @@
- angular
-.module('main')
-.controller('tutorRequest_controller', function($scope, supersonic, $firebaseArray, $rootScope) {
+main.controller('tutorRequest_controller', function($scope, supersonic, $firebaseArray, $rootScope) {
   
 
   var ref = new Firebase("https://hungryeinstein.firebaseio.com/requests");

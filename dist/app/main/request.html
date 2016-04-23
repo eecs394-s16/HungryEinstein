@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+  window.addEventListener('WebComponentsReady', function() {
+    supersonic.app.splashscreen.hide();
+  });
+  </script>
+  <!-- Cloud resource definition file for Supersonic Data -->
+  <script src="/cloud-resources.js"></script>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <title>request</title>
+
+  <link rel="stylesheet" href="/components/supersonic/css/supersonic.css" />
+  <link rel="stylesheet" href="/app/common/stylesheets/application.css" />
+  <link rel="import" href="/components/supersonic/components/import.html">
+
+  <script src="http://localhost/cordova.js"></script>
+  <script src="/components/steroids-js/steroids.js"></script>
+  <script src="/components/angular/angular.js"></script>
+  <script src="/components/supersonic/supersonic.js"></script>
+  <script src="/components/webcomponentsjs/webcomponents.js"></script>
+
+  <!-- firebase dependencies -->
+  <script src="/components/firebase/firebase.js"></script>
+  <script src="/components/angularfire/dist/angularfire.min.js"></script>
+
+  
+  <script src="/app/common.js"></script>
+  
+  <script src="/app/main.js"></script>
+  
+  
+</head>
+<body ng-app="main">
+
+<div ng-controller="request_controller">
+
+  <super-navbar >
+    <super-navbar-title>
+      Make a request now!
+    </super-navbar-title>
+  </super-navbar>
+  message is {{message}}
+  <center> <h2> Hi {{currentUser.firstname}} post what you need? </h2></center>
+    <form name = "requestForm"ng-submit="addRequest()">
+      <div class ="form-group">
+        <div>name:</span>
+        <input type='text' class="form-control" ng-model="requester_name" placeholder="Ariana" ng-required = "true">
+        <p class = "error validationerror" ng-show="requestFrom.requester_name.$invalid && requestFrom.requester_name.$touched">
+        Must be a valid name!
+       </p>
+      </div>
+
+      <div class ="form-group">
+        <div>subject:</span>
+        <input type='text' class="form-control" ng-model="request_subject" placeholder="Math" ng-required = "true">
+        <p class = "error validationerror" ng-show="requestFrom.request_subject.$invalid && requestFrom.request_subject.$touched">
+        Must type in subject!
+       </p>
+      </div>
+
+      <div class ="form-group">
+        <div>Description:</span>
+        <input type='text' class="form-control" ng-model="descriptions" placeholder="Linked List Time Complexity" ng-required = "true">
+        <p class = "error validationerror" ng-show="requestFrom.descriptions.$invalid && requestFrom.descriptions.$touched">
+        Must type in subject!
+       </p>
+      </div>
+
+      <div class ="form-group">
+        <div>food to provide:</span>
+        <input type='text' class="form-control" ng-model="food_provide" placeholder="Chipotle" ng-required = "true">
+        <p class = "error validationerror" ng-show="requestFrom.food_provide.$invalid && requestFrom.food_provide.$touched">
+        Must type in food!
+       </p>
+      </div>
+
+      <div class ="form-group">
+        <div>tutoring location:</span>
+        <input type='text' class="form-control" ng-model="location_tutor" placeholder="Tech L158" ng-required = "true">
+        <p class = "error validationerror" ng-show="requestFrom.location_tutor.$invalid && requestFrom.location_tutor.$touched">
+        Must type in location!
+       </p>
+      </div>
+
+      <div class ="form-group">
+        <div>request expiration:</span>
+        <input type='date' class="form-control" ng-model="request_expiry" placeholder="date" ng-required = "true">
+        <p class = "error validationerror" ng-show="requestFrom.request_expiry.$invalid && requestFrom.request_expiry.$touched">
+        Must have request expiration!
+       </p>
+      </div>
+
+      <button type ="submit" class ="button button-full button-positive" ng-disabled="requestForm.$invalid">Submit Request</button>
+  </form>
+</div>
+
+</body>
+</html>

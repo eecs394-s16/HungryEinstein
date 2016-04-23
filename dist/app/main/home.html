@@ -36,100 +36,76 @@
 </head>
 <body ng-app="main">
 
-
-<div class="row" ng-controller="home_controller">
-
+<div ng-controller="home_controller" ng-init="initFirst()">
   <super-navbar>
     <super-navbar-title>
       Home
     </super-navbar-title>
+    <super-navbar-button ng-click="logout()" side = "right">Logout
+    </super-navbar-button>
   </super-navbar>
 
-
-  <div class ="col-md-5">
-    <h3> Add Request</h3>
-    <form ng-submit="addRequest()">
-      <div class ="form-group">
-        <label>Name</label>
-        <input type ="text" class ="form-control" ng-model="name" placeholder="Name"></input>
-      </div>
-
-      <div class ="form-group">
-        <label>Subject</label>
-        <input type ="text" class ="form-control" ng-model="subject" placeholder="Subject you want to be tutored in"></input>
-      </div>
-
-      <div class ="form-group">
-        <label>Date of expiration</label>
-        <input type ="text" class ="form-control" ng-model="expiry" placeholder="Date of expiration"></input>
-      </div>
-
-      <button type ="submit" class ="btn btn-default">Submit Request</button>
-    </form>
-  </div>
-
-<div ng-controller="home_controller">
-	<super-navbar>
-	  <super-navbar-title>
-	    Home
-	  </super-navbar-title>
-	  <super-navbar-button ng-click="logout()" side = "right">Logout
-	  </super-navbar-button>
-	</super-navbar>
-
-	<div class="textintro">
+  <div class="textintro" ng-show="currentUser">
       <center>
         <h1 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h1>
-        <h2 class = "padding-vertical" >Here are the current listings: </h2>
+<!--         <h2 class = "padding-vertical" >Here are the current listings: </h2> -->
       </center>
-    </div>
-
-     <!-- search input-->
-    <div class = "item item-input item-stacked-label"> 
-    	<div class="card">
-    		<label class="item item-input">
-    			<i class="icon super-search placeholder-icon"></i>
-    			<input ng-model="query" placeholder=" Type either a food or subject" autofocus>
-    		</label>
-    	</div>
-    </div>
-
-    <!--Cards (still in sandbox at the moment) -->
-  <ul class="list" ng-hide="requestss.length == 0">
-
-      <super-navigate location="requests#show" data-params-id="{{ requests.id }}" ng-repeat="requests in requestss | orderBy: artistOrder: direction | filter: query ">
-        <li class="item item-icon-right">
-          <span ng-bind="requests['Subject']  + ' for ' + requests['Food']"></span>
-          <i class="icon super-ios-arrow-right"></i>
-        </li>
-      </super-navigate>
-    </ul>
-
-    <h4 ng-show="requestss.length == 0" class="assertive padding">
-      No requests found. Create one?
-    </h4>
-
-    <!--<super-modal-show location="requests#new"> -->
-      <button class="button button-block button-positive">
-        Find a Tutor
-      </button>
-   <!-- </super-modal-show> -->
-
-    <!--<super-modal-show location="requests#notify"> -->
-      <button class="button button-full button-clear button-positive">
-      </button>
-    <!--</super-modal-show>-->
-
   </div>
-    <!-- {{message}} -->
 
-    <!-- {{message}} logout information-->
-    <form class = "formgroup" name="requestform" ng-submit="addRequest()" novalidate>
-    	<div>
-	    	<input type="text" ng-required="true" placeholder="food" ng-model="requestfood">    		
-    	</div>
-    	<button type="submit" ng-disabled="requestform.$invalid">+</button>
-    </form>
+   <!-- search input-->
+  <div class = "item item-input item-stacked-label"> 
+    <div class="card">
+      <label class="item item-input">
+        <i class="icon super-search placeholder-icon"></i>
+        <input ng-model="query" placeholder=" Type either a food or subject" autofocus>
+      </label>
+    </div>
+  </div>
+
+  <!-- message: {{message}} -->
+ <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
+  <div>
+    <span ng-show="requestNumber"> Requests Number is : {{requestNumber}}</span>
+  </div>
+<!--   <div>
+    <ul>
+      <li ng-repeat = "card in requestsAll">{{card.subject}} for {{card.food}} 
+        <button ng-click="deleteRequest(key)">accept</button>
+      </li>
+    </ul>
+  </div> -->
+ 
+<h3>all requests not been accpeted</h3>
+
+  <!-- <div> -->
+    <!-- {{acceptRec}}
+    <ul>
+      <li ng-repeat = "(key, card) in requestUnaccepted | filter: query">{{card.food}} for {{card.subject}} at {{card.location}}
+      <super-navigate location="main#detail">
+        <button class="button button-full button-calm">More</button>
+     </super-navigate>
+        <!-- <button class = "button-calm" ng-click="accept(key)">accept</button> -->
+      <!-- </li> -->
+    <!-- </ul> -->
+  <!-- </div> --> 
+  <div>
+    <!-- {{acceptRec}} -->
+    <ul>
+      <li ng-repeat = "(key, card) in allRequests | filter: {accepted : false}">{{card.food}} for {{card.subject}} at {{card.location}}
+        <button class="btn" ng-click="accept(key)">accept</button>
+        <!-- <button class = "button-calm" ng-click="accept(key)">accept</button> -->
+      </li>
+    </ul>
+  </div>
+
+ acceptRec is {{acceptRec}}
+ {{message}}
+ {{requetsAll}}
+ <!-- {{test}} -->
+    <super-navigate location="main#request">
+     <button  class="button button-full button-calm">Find a Tutor</button>
+    </super-navigate>
+
 </div>
 
 

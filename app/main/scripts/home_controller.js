@@ -1,57 +1,82 @@
-angular
-.module('main')
+main.controller('home_controller',
+	['$scope','$rootScope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', '$firebaseAuth','$interval',
+	function($scope,$rootScope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, $firebaseAuth,$interval){
+	var ref = new Firebase(FIREBASE_URL);
+	var auth = $firebaseAuth(ref);
+    // successfully login and extract login user's infomation
 
- main.controller('home_controller',
-	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
-	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
+	auth.$onAuth(function(authUser){
+		if (authUser){
+			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
+			var userObj = $firebaseObject(authRef);
+			$rootScope.currentUser = userObj;  // get currentUserInfo
 
-		var ref = new Firebase(FIREBASE_URL + 'users/');
-		// var syndata = $firebaseObject(ref);
-		// syndata.$bindTo($scope, "data");
+            // request folder ----------------managing all requests 
+            var refRequest = new Firebase(FIREBASE_URL + 'requests/');
+            var allRequests = $firebaseArray(refRequest);
+            // var requestsNum = 0;
+			var requestUnaccepted = [];
+            var requestUnacceptedKey = [];
+            // $scope.message  = "nope!";
+	
+            // allRequests = [{name: 'Jimi', gender: "18"},{name: 'Peter', gender: '20'},{name: 'Bob', gender: '30'}];
+            allRequests.$loaded().then(function(){
+            	angular.forEach(allRequests, function(value, key){
+            		// travese all requests
+            			if(value.accepted == false){
+            				requestUnaccepted.push(value);
+            				// $scope.acceptRec = value;
+            				// requestsNum = requestNum + 1;
+            				requestUnacceptedKey.push(value.$id);
+            			}
+            		// angular.forEach(value, function(value, key){
 
-		$scope.messages = $firebaseArray(ref);
+            		// });
+            	});
+            });
+			// }
 
-		$scope.login = function() {
-			Authentication.login($scope.user);
-			
-		};
-		$scope.logout = function() {
-			Authentication.logout();
-		};
-		
-		$scope.register = function(){
-			Authentication.register($scope.user);
-		};
+            // $scope.requestUnaccepted = requestUnaccepted;
+    //      // $scope.requestNumber = requestNumber;
+            $scope.allRequests = allRequests;
+    //         // // $scope.requestsAll = allRequests;
+            $scope.accept = function(index){
+            	var firebID = requestUnacceptedKey[index];
 
-		$scope.addRequest = function(){
-			Authentication.addRequest();
-		};
+            	var record = allRequests.$getRecord(firebID);
+            	record.accepted = true;
 
+            	allRequests.$save(record).then(function(){
+   
+            		requestUnacceptedKey.splice(index, 1);
+            	});
+
+				// ref.on('child_changed', function() {
+					// $scope.requestUnaccepted.$loaded(function(data){
+				// $scope.message = "go in here";
+					// });
+				// });
+				
+            	// allRequests.$watch(function(data){
+            	// 	// function PersonListCtrl($scope, $http) {
+            	// 	$scope.requestUnaccepted.$loaded(function(){
+
+            	// 	});
+            	// });
+				// function update(){
+				// 	allRequests.$loaded(function(x){})
+				// }
+
+            };
+      //       $scope.requetsAll = allRequests;
+    		// $interval($scope.requetsAll, 100);
+
+	        $scope.logout = function(){
+				$scope.message = "successfully logout!";
+				supersonic.ui.initialView.show();
+				return auth.$unauth();
+	        };
+
+		} // userAuthenticated
+	});  // onAuth
 }]);
-
-
-
-
-
-// .controller('home_controller', function($scope, supersonic, $firebaseArray) {
-// 	var ref = new Firebase("https://hungryeinstein.firebaseio.com/");
-
-// 	$scope.requests = $firebaseArray(ref);
-// 	alert("hi");
-// 	$scope.myDate = new Date("Fri Apr 21 2017 00:00:00 GMT-0500 (CDT)");
-// 	alert($scope.myDate.getDay());
-// 	$scope.addRequest = function(){
-// 		console.log('Adding Request');
-// 		$scope.requests.$add({
-// 			name: $scope.name,
-// 			subject: $scope.subject,
-// 			expiry: $scope.expiry
-// 		}).then(function(ref){
-// 			var id = ref.key();
-// 			console.log("Added Request" + id);
-// 			$scope.name =" ";
-// 			$scope.subject =" ";
-// 			$scope.expiry =" ";
-// 		});
-// 	}
-// })

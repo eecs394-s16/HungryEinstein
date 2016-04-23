@@ -4,11 +4,9 @@ main.factory('Authentication',
 
 		var ref = new Firebase(FIREBASE_URL);
 		var auth = $firebaseAuth(ref);
-		var temp_auth;		   
         // successfully login and extract login user's infomation
 		auth.$onAuth(function(authUser){
 			if (authUser){
-				temp_auth = authUser;
 				var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
 				var userObj = $firebaseObject(authRef);
 				// $rootScope.messages =
@@ -22,26 +20,26 @@ main.factory('Authentication',
 		});
 		
 		return {
-			addRequest: function(){
-				$scope.message = "fail";
+			// addRequest: function(){
+			// 	$scope.message = "fail";
 
-				if (temp_auth){
-					$scope.message = "add successfully!";
+			// 	if (temp_auth){
+			// 		$scope.message = "add successfully!";
 
-				}
-				var requestRef = new Firebase(FIREBASE_URL + 'users/' + 
-					temp_auth.uid + '/foods');
+			// 	}
+			// 	var requestRef = new Firebase(FIREBASE_URL + 'users/' + 
+			// 		temp_auth.uid + '/foods');
 
-				var foodinfo = $firebaseArray(requestRef);
+			// 	var foodinfo = $firebaseArray(requestRef);
 
-					foodinfo.$add({
-						name: $scope.requestfood,
-						date: Firebase.ServerValue.TIMESTAMP
-					}).then(function(){
-						$scope.requestfood = '';
-						$scope.message = "add successfully!";
-					}); 
-			},
+			// 		foodinfo.$add({
+			// 			name: $scope.requestfood,
+			// 			date: Firebase.ServerValue.TIMESTAMP
+			// 		}).then(function(){
+			// 			$scope.requestfood = '';
+			// 			$scope.message = "add successfully!";
+			// 		}); 
+			// },
 
 			logout: function(){
 				$rootScope.message = "successfully logout!";
