@@ -2,7 +2,7 @@
   "preloads": [],
   "initialView": {
     "id": "initialView",
-    "location": "http://localhost/app/main/home.html"
+    "location": "http://localhost/app/main/login.html"
   },
   "tabs": [
     {

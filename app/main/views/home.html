@@ -8,48 +8,46 @@
   </super-navbar>
 
   <div class="textintro" ng-show="currentUser">
-      <center>
-        <h1 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h1>
-<!--         <h2 class = "padding-vertical" >Here are the current listings: </h2> -->
-      </center>
+    <center>
+      <h1 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h1>
+      <!--         <h2 class = "padding-vertical" >Here are the current listings: </h2> -->
+    </center>
   </div>
 
-   <!-- search input-->
-  <div class = "item item-input item-stacked-label"> 
-    <div class="card">
-      <label class="item item-input">
-        <i class="icon super-search placeholder-icon"></i>
-        <input ng-model="query" placeholder=" Type either a food or subject" autofocus>
-      </label>
-    </div>
+  <!-- search input-->
+  <div class = "item item-input item-stacked-label">
+    <label class="item item-input">
+      <i class="icon super-search placeholder-icon"></i>
+      <input ng-model="query" placeholder=" Type either a food or subject" autofocus>
+    </label>
   </div>
 
   <!-- message: {{message}} -->
- <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
+  <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
   <div>
     <span ng-show="requestNumber"> Requests Number is : {{requestNumber}}</span>
   </div>
 
- 
-<h3>all requests not been accpeted</h3>
 
- 
+  <h3>Tutor Requests</h3>
+
+
   <div>
     <!-- {{acceptRec}} -->
     <ul>
-      <li ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query">{{card.food}} for {{card.subject}} at {{card.location}}
-        <button class="btn" ng-click="accept(key)">accept</button>
-       
-      </li>
+      <h4><li ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query">{{card.food}} for {{card.subject}} at {{card.location}}
+        <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>
+
+      </li></h4>
     </ul>
   </div>
 
- <!-- acceptRec is {{acceptRec}} -->
- <!-- message is {{message}} -->
- <!-- {{requetsAll}} -->
- <!-- {{test}} -->
-    <super-navigate location="main#request">
-     <button  class="button button-full button-calm">Find a Tutor</button>
-    </super-navigate>
+  <!-- acceptRec is {{acceptRec}} -->
+  <!-- message is {{message}} -->
+  <!-- {{requetsAll}} -->
+  <!-- {{test}} -->
+  <super-navigate location="main#request">
+    <button  class="button button-full button-calm">Find a Tutor</button>
+  </super-navigate>
 
 </div>

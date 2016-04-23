@@ -5,11 +5,11 @@
       Make a request now!
     </super-navbar-title>
   </super-navbar>
-  message is {{message}}
-  <center> <h2> Hi {{currentUser.firstname}} post what you need? </h2></center>
+  <!-- message is {{message}} -->
+  <center> <h2> {{currentUser.firstname}, fill out a request here</h2></center>
     <form name = "requestForm"ng-submit="addRequest()">
       <div class ="form-group">
-        <div>name:</span>
+        <h4><div>Your Name:</span></h4>
         <input type='text' class="form-control" ng-model="requester_name" placeholder="Ariana" ng-required = "true">
         <p class = "error validationerror" ng-show="requestFrom.requester_name.$invalid && requestFrom.requester_name.$touched">
         Must be a valid name!
@@ -17,7 +17,7 @@
       </div>
 
       <div class ="form-group">
-        <div>subject:</span>
+        <h4><div>Subject you need help in:</span></h4>
         <input type='text' class="form-control" ng-model="request_subject" placeholder="Math" ng-required = "true">
         <p class = "error validationerror" ng-show="requestFrom.request_subject.$invalid && requestFrom.request_subject.$touched">
         Must type in subject!
@@ -25,7 +25,7 @@
       </div>
 
       <div class ="form-group">
-        <div>Description:</span>
+        <h4><div>Description of what you need help with:</span></h4>
         <input type='text' class="form-control" ng-model="descriptions" placeholder="Linked List Time Complexity" ng-required = "true">
         <p class = "error validationerror" ng-show="requestFrom.descriptions.$invalid && requestFrom.descriptions.$touched">
         Must type in subject!
@@ -33,7 +33,7 @@
       </div>
 
       <div class ="form-group">
-        <div>food to provide:</span>
+        <h4><div>Food you will provide:</span></h4>
         <input type='text' class="form-control" ng-model="food_provide" placeholder="Chipotle" ng-required = "true">
         <p class = "error validationerror" ng-show="requestFrom.food_provide.$invalid && requestFrom.food_provide.$touched">
         Must type in food!
@@ -41,7 +41,7 @@
       </div>
 
       <div class ="form-group">
-        <div>tutoring location:</span>
+        <h4><div>Preferred tutoring location:</span></h4>
         <input type='text' class="form-control" ng-model="location_tutor" placeholder="Tech L158" ng-required = "true">
         <p class = "error validationerror" ng-show="requestFrom.location_tutor.$invalid && requestFrom.location_tutor.$touched">
         Must type in location!
@@ -49,7 +49,7 @@
       </div>
 
       <div class ="form-group">
-        <div>request expiration:</span>
+        <h4><div>Request expiration:</span></h4>
         <input type='date' class="form-control" ng-model="request_expiry" placeholder="date" ng-required = "true">
         <p class = "error validationerror" ng-show="requestFrom.request_expiry.$invalid && requestFrom.request_expiry.$touched">
         Must have request expiration!
