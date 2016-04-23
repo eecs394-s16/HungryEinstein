@@ -1,10 +1,21 @@
 main.controller('schedule_controller',
-	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
-	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
+	['$scope', '$firebase','$firebaseAuth', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
+	function($scope, $firebase, $firebaseAuth, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
+		
+		var ref = new Firebase(FIREBASE_URL);
+		var auth = $firebaseAuth(ref);
+        
+		auth.$onAuth(function(authUser){
+		if (authUser){
+			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
+			var userObj = $firebaseObject(authRef);
+			$scope.currentUser = userObj;  // get currentUserInfo
+
+
 
 		$scope.currentRequest = steroids.views.params.id
 		
-		var ref = new Firebase("https://hungryeinstein.firebaseio.com/requests");
+		var ref = new Firebase(FIREBASE_URL + 'requests/');
 
 		$scope.req = $firebaseArray(ref);
 
@@ -17,10 +28,6 @@ main.controller('schedule_controller',
 		// var query = ref.orderByChild("timestamp")
 
 		// $scope.filteredRequests = $firebaseArray(query)
-
-
-
-
 		$scope.cancel = function () {
 			req.find($scope.currentRequest).then(function(request) {
 
@@ -32,10 +39,12 @@ main.controller('schedule_controller',
         			});
 
         		});
-     });
+     	});
 
 
-   }
+		};
+			} // valid authUser
+		});// onauth
 		
 
 }]);

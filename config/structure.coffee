@@ -17,7 +17,7 @@ module.exports =
     {
       title: "Schedule"
       id: "schedule"
-      location: "main#newRequest"
+      location: "main#schedule"
     }
   ]
 
@@ -37,4 +37,4 @@ module.exports =
   #
   initialView:
     id: "initialView"
-    location: "main#home"
+    location: "main#login"

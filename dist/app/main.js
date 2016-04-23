@@ -394,6 +394,11 @@ main.factory('Authentication',
 
 		var ref = new Firebase(FIREBASE_URL);
 		var auth = $firebaseAuth(ref);
+// change to login page 
+		var modalView = new supersonic.ui.View("main#login");
+		var options = {
+				animate: true
+				}
         // successfully login and extract login user's infomation
 		auth.$onAuth(function(authUser){
 			if (authUser){
@@ -410,26 +415,6 @@ main.factory('Authentication',
 		});
 		
 		return {
-			// addRequest: function(){
-			// 	$scope.message = "fail";
-
-			// 	if (temp_auth){
-			// 		$scope.message = "add successfully!";
-
-			// 	}
-			// 	var requestRef = new Firebase(FIREBASE_URL + 'users/' + 
-			// 		temp_auth.uid + '/foods');
-
-			// 	var foodinfo = $firebaseArray(requestRef);
-
-			// 		foodinfo.$add({
-			// 			name: $scope.requestfood,
-			// 			date: Firebase.ServerValue.TIMESTAMP
-			// 		}).then(function(){
-			// 			$scope.requestfood = '';
-			// 			$scope.message = "add successfully!";
-			// 		}); 
-			// },
 
 			logout: function(){
 				$rootScope.message = "successfully logout!";
@@ -446,6 +431,8 @@ main.factory('Authentication',
 				then(function(){
 					//login successfully
 					// $rootScope.message = "welcome login in" + user.email;
+					user.email ='';
+					user.password='';
 					var animation = supersonic.ui.animate("fade");
    					supersonic.ui.initialView.dismiss(animation);
 				}).catch(function(error){
@@ -469,7 +456,9 @@ main.factory('Authentication',
 						regID: regUser.uid
 					}); //user info
 					// $window.location.href = 'home.html';
-					supersonic.ui.initialView.show();
+					// supersonic.ui.initialView.show();
+				 supersonic.ui.modal.show(modalView, options);
+
 				}).catch(function(error){
 					$rootScope.message = error.message;
 				}); // createUser
@@ -674,6 +663,9 @@ main.controller('request_controller',
 			var options = {
 				animate: true
 				}
+
+			// var view = new supersonic.ui.View("bananas#show");
+			supersonic.ui.layers.push(modalView);	
 	        $scope.addRequest = function() {
 			requestsInfoAll.$add({
 		            name: $scope.requester_name,
@@ -694,8 +686,9 @@ main.controller('request_controller',
 					$scope.food_provide='';
 					$scope.location_tutor='';
 					$scope.descriptions='';
-					supersonic.ui.modal.show(modalView);
-
+					// supersonic.ui.modal.show(modalView);
+					// supersonic.ui.model.hide();
+					supersonic.ui.layers.pop();
 				});
 					// $scope.message = "Add request successfully!";
 					
@@ -716,12 +709,23 @@ main.controller('request_controller',
 }]);
 
 main.controller('schedule_controller',
-	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
-	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
+	['$scope', '$firebase','$firebaseAuth', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
+	function($scope, $firebase, $firebaseAuth, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
+		
+		var ref = new Firebase(FIREBASE_URL);
+		var auth = $firebaseAuth(ref);
+        
+		auth.$onAuth(function(authUser){
+		if (authUser){
+			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
+			var userObj = $firebaseObject(authRef);
+			$scope.currentUser = userObj;  // get currentUserInfo
+
+
 
 		$scope.currentRequest = steroids.views.params.id
 		
-		var ref = new Firebase("https://hungryeinstein.firebaseio.com/requests");
+		var ref = new Firebase(FIREBASE_URL + 'requests/');
 
 		$scope.req = $firebaseArray(ref);
 
@@ -734,10 +738,6 @@ main.controller('schedule_controller',
 		// var query = ref.orderByChild("timestamp")
 
 		// $scope.filteredRequests = $firebaseArray(query)
-
-
-
-
 		$scope.cancel = function () {
 			req.find($scope.currentRequest).then(function(request) {
 
@@ -749,117 +749,12 @@ main.controller('schedule_controller',
         			});
 
         		});
-     });
+     	});
 
 
-   }
+		};
+			} // valid authUser
+		});// onauth
 		
 
 }]);
-
-main.controller('tutorRequest_controller', function($scope, supersonic, $firebaseArray, $rootScope) {
-  
-
-  var ref = new Firebase("https://hungryeinstein.firebaseio.com/requests");
-
-  updateRequest();
-
-  // $scope.message = $rootScope.currentUser.firstname;
-
-  // $scope.message = "Calling controller";
-
-  $scope.addRequest = function(){
-    console.log('Sending Message');
-    $scope.requests.$add({
-      name: $scope.name,
-      date: $scope.date.toString(),
-      subject: $scope.subject,
-      location: $scope.location_tutor,
-      accepted: false,
-      // userID: $rootScope.currentUser.firstname,
-      tutorID: 0
-    });
-  };
-
-  ref.on('child_added', function() {
-    updateRequest();
-  });
-
-  function updateRequest(){
-    $scope.requests = $firebaseArray(ref);
-  }
-
-});
-
-
-
-
-
-// angular
-// .module('main')
-// .controller('tutorRequest_controller', 
-//   ['$scope','$firebaseArray','supersonic',
-// 	// ['$scope', '$rootScope','$firebaseAuth', 'FIREBASE_URL', '$firebaseArray', '$firebaseObject', 'supersonic', 'Authentication',
-// 	function($scope, $firebaseArray, supersonic) {
-	
-//   var ref = new Firebase("https://hungryeinstein.firebaseio.com/" + 'requests/');
-//     $scope.message = "link ok ";
-
-//   var requestInfo = $firebaseArray(ref);
-
- 
-//   // updateRequest();
-
-//   $scope.addRequest = function(){
-//     // console.log('Sending Message');
-//     $scope.message = "go into add ";
-//     requestInfo.$add({
-//       // name: $scope.name,
-//       // date_tutor: $scope.date.toString(),
-//       // subject: $scope.subject,
-//       // food: $scope.food,
-//       // location: $scope.location_tutor,
-//       // // accepted: false,
-//       // // userID: currentUser.$id,
-//       // // tutorID: null
-//     }).then(function(ref){
-//       var id = ref.key();
-//       $scope.name =" ";
-//       $scope.subject =" ";
-//     });
-//   };
-
-//   // ref.on('child_added', function() {
-//   //   updateRequest();
-//   // });
-
-
-//   // function updateRequest(){
-//   //   var request = $firebaseArray(ref);
-//   //   $scope.message = "go into update ";
-//   // }
-	
-//   // var sync = $firebase(ref);
-//   // $scope.projects = sync.$asArray();
-
-//   // $scope.addMessage = function(data) {
-//   //  $scope.projects.$add({data: data});
-//   // }
-
-// 	// $scope.addRequest = function () {
-//  //    var name = $scope.name.trim();
-//  //    var subject = $scope.subject.trim();
-//  //    var expiry = $scope.expiry.trim();
-
-//  //    $scope.projects.$add({
-//  //      nm: name,
-//  //      sbjt: subject,
-//  //      expry: expiry
-//  //    });
-
-//  //    $scope.name = '';
-//  //    $scope.subject = '';
-//  //    $scope.expiry = '';
-//  //  };
-
-// });

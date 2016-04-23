@@ -4,6 +4,11 @@ main.factory('Authentication',
 
 		var ref = new Firebase(FIREBASE_URL);
 		var auth = $firebaseAuth(ref);
+// change to login page 
+		var modalView = new supersonic.ui.View("main#login");
+		var options = {
+				animate: true
+				}
         // successfully login and extract login user's infomation
 		auth.$onAuth(function(authUser){
 			if (authUser){
@@ -20,26 +25,6 @@ main.factory('Authentication',
 		});
 		
 		return {
-			// addRequest: function(){
-			// 	$scope.message = "fail";
-
-			// 	if (temp_auth){
-			// 		$scope.message = "add successfully!";
-
-			// 	}
-			// 	var requestRef = new Firebase(FIREBASE_URL + 'users/' + 
-			// 		temp_auth.uid + '/foods');
-
-			// 	var foodinfo = $firebaseArray(requestRef);
-
-			// 		foodinfo.$add({
-			// 			name: $scope.requestfood,
-			// 			date: Firebase.ServerValue.TIMESTAMP
-			// 		}).then(function(){
-			// 			$scope.requestfood = '';
-			// 			$scope.message = "add successfully!";
-			// 		}); 
-			// },
 
 			logout: function(){
 				$rootScope.message = "successfully logout!";
@@ -56,6 +41,8 @@ main.factory('Authentication',
 				then(function(){
 					//login successfully
 					// $rootScope.message = "welcome login in" + user.email;
+					user.email ='';
+					user.password='';
 					var animation = supersonic.ui.animate("fade");
    					supersonic.ui.initialView.dismiss(animation);
 				}).catch(function(error){
@@ -79,7 +66,9 @@ main.factory('Authentication',
 						regID: regUser.uid
 					}); //user info
 					// $window.location.href = 'home.html';
-					supersonic.ui.initialView.show();
+					// supersonic.ui.initialView.show();
+				 supersonic.ui.modal.show(modalView, options);
+
 				}).catch(function(error){
 					$rootScope.message = error.message;
 				}); // createUser

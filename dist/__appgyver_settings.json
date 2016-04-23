@@ -2,7 +2,7 @@
   "preloads": [],
   "initialView": {
     "id": "initialView",
-    "location": "http://localhost/app/main/home.html"
+    "location": "http://localhost/app/main/login.html"
   },
   "tabs": [
     {
@@ -21,7 +21,7 @@
       "position": 2,
       "id": "schedule",
       "title": "Schedule",
-      "target_url": "http://localhost/app/main/newRequest.html"
+      "target_url": "http://localhost/app/main/schedule.html"
     }
   ],
   "configuration": {

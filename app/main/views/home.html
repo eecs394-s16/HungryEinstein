@@ -29,40 +29,24 @@
   <div>
     <span ng-show="requestNumber"> Requests Number is : {{requestNumber}}</span>
   </div>
-<!--   <div>
-    <ul>
-      <li ng-repeat = "card in requestsAll">{{card.subject}} for {{card.food}} 
-        <button ng-click="deleteRequest(key)">accept</button>
-      </li>
-    </ul>
-  </div> -->
+
  
 <h3>all requests not been accpeted</h3>
 
-  <!-- <div> -->
-    <!-- {{acceptRec}}
-    <ul>
-      <li ng-repeat = "(key, card) in requestUnaccepted | filter: query">{{card.food}} for {{card.subject}} at {{card.location}}
-      <super-navigate location="main#detail">
-        <button class="button button-full button-calm">More</button>
-     </super-navigate>
-        <!-- <button class = "button-calm" ng-click="accept(key)">accept</button> -->
-      <!-- </li> -->
-    <!-- </ul> -->
-  <!-- </div> --> 
+ 
   <div>
     <!-- {{acceptRec}} -->
     <ul>
-      <li ng-repeat = "(key, card) in allRequests | filter: {accepted : false}">{{card.food}} for {{card.subject}} at {{card.location}}
+      <li ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query">{{card.food}} for {{card.subject}} at {{card.location}}
         <button class="btn" ng-click="accept(key)">accept</button>
-        <!-- <button class = "button-calm" ng-click="accept(key)">accept</button> -->
+       
       </li>
     </ul>
   </div>
 
- acceptRec is {{acceptRec}}
- {{message}}
- {{requetsAll}}
+ <!-- acceptRec is {{acceptRec}} -->
+ <!-- {{message}} -->
+ <!-- {{requetsAll}} -->
  <!-- {{test}} -->
     <super-navigate location="main#request">
      <button  class="button button-full button-calm">Find a Tutor</button>

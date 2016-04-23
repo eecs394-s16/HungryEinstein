@@ -31,6 +31,9 @@ main.controller('request_controller',
 			var options = {
 				animate: true
 				}
+
+			// var view = new supersonic.ui.View("bananas#show");
+			supersonic.ui.layers.push(modalView);	
 	        $scope.addRequest = function() {
 			requestsInfoAll.$add({
 		            name: $scope.requester_name,
@@ -51,8 +54,9 @@ main.controller('request_controller',
 					$scope.food_provide='';
 					$scope.location_tutor='';
 					$scope.descriptions='';
-					supersonic.ui.modal.show(modalView);
-
+					// supersonic.ui.modal.show(modalView);
+					// supersonic.ui.model.hide();
+					supersonic.ui.layers.pop();
 				});
 					// $scope.message = "Add request successfully!";
 					
