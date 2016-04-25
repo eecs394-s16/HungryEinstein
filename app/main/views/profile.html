@@ -1,10 +1,12 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-<div class="padding" ng-controller="home_controller">
+<div class="padding" ng-controller="profile_controller">
 
   <super-navbar>
     <super-navbar-title>
       Profile
     </super-navbar-title>
   </super-navbar>
-
+	 <button class= "button" ng-click="takephoto()">Take a photo</button>
+	 <button class = "button" ng-click = "getImgFromLib()"> Upload a photo </button>
+	 <img src="data:image/png;base64,{{currentUser.img}}">
 </div>

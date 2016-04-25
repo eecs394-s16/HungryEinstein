@@ -9,7 +9,10 @@ main.controller('home_controller',
 		if (authUser){
 			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
 			var userObj = $firebaseObject(authRef);
+                  var userArray = $firebaseArray(authRef);
+
 			$rootScope.currentUser = userObj;  // get currentUserInfo
+
 
             // request folder ----------------managing all requests 
             var refRequest = new Firebase(FIREBASE_URL + 'requests/');
@@ -18,7 +21,9 @@ main.controller('home_controller',
 		var requestUnaccepted = [];
             var requestUnacceptedKey = [];
             // $scope.message  = "nope!";
-	
+
+            // $scope.$apply ->  
+            //       $scope.myData = functionThatFetchesNewData()	
             // allRequests = [{name: 'Jimi', gender: "18"},{name: 'Peter', gender: '20'},{name: 'Bob', gender: '30'}];
             allRequests.$loaded().then(function(){
             	angular.forEach(allRequests, function(value, key){
@@ -29,13 +34,46 @@ main.controller('home_controller',
             				// requestsNum = requestNum + 1;
             				requestUnacceptedKey.push(value.$id);
             			}
-            		// angular.forEach(value, function(value, key){
 
+                              // update all imgs belong to this user account
+                              if(value.userID == authUser.uid) {
+                                    value.userImg = userArray.$getRecord("img").$value;
+
+                              }
+                              if(value.tutorID == authUser.uid) {
+                                    value.tutorImg = userArray.$getRecord("img").$value;
+                              }
+                             allRequests.$save(value).then(function(ref){
+
+                             });
+            		// angular.forEach(value, function(value, key){
             		// });
             	});
             });
 			// }
+            angular.forEach(allRequests, function(value, key){
+                        // travese all requests
+                              // if(value.accepted == false){
+                              //       requestUnaccepted.push(value);
+                              //       // $scope.acceptRec = value;
+                              //       // requestsNum = requestNum + 1;
+                              //       requestUnacceptedKey.push(value.$id);
+                              // }
 
+                              // update all imgs belong to this user account
+                              if(value.userID == authUser.uid) {
+                                    value.userImg = userArray.$getRecord("img").$value;
+
+                              }
+                              if(value.tutorID == authUser.uid) {
+                                    value.tutorImg = userArray.$getRecord("img").$value;
+                              }
+                             allRequests.$save(value).then(function(ref){
+
+                             });
+                        // angular.forEach(value, function(value, key){
+                        // });
+                  });
             // $scope.requestUnaccepted = requestUnaccepted;
     //      // $scope.requestNumber = requestNumber;
             $scope.allRequests = allRequests;
@@ -47,6 +85,7 @@ main.controller('home_controller',
             	var record = allRequests.$getRecord(firebID);
             	record.accepted = true;
                   record.tutorID = $rootScope.currentUser.$id;
+                  record.tutorImg = $rootScope.currentUser.img;
                   // $scope.message = $rootScope.currentUser.$id;
                   // $scope.myDate = record.dateExp;
                   // $scope.message  = myDate
@@ -79,19 +118,27 @@ main.controller('home_controller',
 
             };
 
+            $scope.cancelTutor = function(card){
+                  // $scope.message = card.accepted;
+                  card.accepted = false;
+                  $scope.message = card;
+                  allRequests.$save(card).then(function(){
 
-      //       $scope.requetsAll = allRequests;
-    		// $interval($scope.requetsAll, 100);
-
+                  });
+            }
             
+            $scope.removeRequest = function(card){
+                  allRequests.$remove(card).then(function(ref){
+
+                  });
+            }
 
 
-
-	        $scope.logout = function(){
+	     $scope.logout = function(){
 				$scope.message = "successfully logout!";
 				supersonic.ui.initialView.show();
 				return auth.$unauth();
-	        };
+	     };
 
 		} // userAuthenticated
 	});  // onAuth

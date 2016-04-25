@@ -1,4 +1,4 @@
-<div ng-controller="home_controller" ng-init="initFirst()">
+<div ng-controller="home_controller">
   <super-navbar>
     <super-navbar-title>
       Home
@@ -36,12 +36,10 @@
   <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query" >{{card.food}} for {{card.subject}} at {{card.location}}
      <p><input type ="checkbox" ng-model="show_detail"> View Details
     <div ng-show="show_detail"></p>
-      <p>
-            Student: {{card.name}},  Decription: {{card.description}}
+      <p>  <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}"> Student: {{card.name}},  Decription: {{card.description}}
          </p>
        </div>
        <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>
-
      </li></h4></i>
 
    </ul>
@@ -53,5 +51,5 @@
   <super-navigate location="main#request">
     <button  class="button button-full button-calm">Find a Tutor</button>
   </super-navigate>
-
-</div>
+<!-- message : {{message}} -->
+ </div>

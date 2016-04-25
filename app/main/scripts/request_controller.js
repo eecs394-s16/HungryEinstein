@@ -1,6 +1,6 @@
 main.controller('request_controller',
 	['$scope','$rootScope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', '$firebaseAuth', 'supersonic',
-	function($scope,$rootScope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, $firebaseAuth,supersonic){
+	function($scope, $rootScope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, $firebaseAuth, supersonic){
 	var ref = new Firebase(FIREBASE_URL);
 	var auth = $firebaseAuth(ref);
     // successfully login and extract login user's infomation
@@ -9,20 +9,10 @@ main.controller('request_controller',
 		if (authUser){
 			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
 			var userObj = $firebaseObject(authRef);
-			$rootScope.currentUser = userObj;  // get currentUserInfo
+			var userArray = $firebaseArray(authRef);
+
+			// $rootScope.currentUser = userObj;  // get currentUserInfo
     		// $scope.message = "go into here";
-        // // ---------------GET ALL PERSONAL REQUESTS AND SCHEDUAL INFORMATION -------
-	       //  var requestsRef = new Firebase(FIREBASE_URL + 'users/' +
-	       //    $rootScope.currentUser.$id + '/requests');
-	       //  var requestsInfoPersonal = $firebaseArray(requestsRef);
-            
-	        // // get all requests and connect to html
-         //    $scope.allRequests = requestsInfoPersonal;
-
-            // requestsInfoPersonal.$watch(function(data){
-            // 	$rootScope.requestNumber = requestsInfoPersonal.length;
-            // });
-
 
             // request folder ----------------managing all requests 
             var refRequest = new Firebase(FIREBASE_URL + 'requests/');
@@ -31,11 +21,14 @@ main.controller('request_controller',
 			var options = {
 				animate: true
 				}
-
 			// var view = new supersonic.ui.View("bananas#show");
 			supersonic.ui.layers.push(modalView);	
+			// var record2 = userObj;
+			// $rootScope.message2 = authUser.uid;
+
 	        $scope.addRequest = function() {
-			requestsInfoAll.$add({
+				requestsInfoAll.$add({
+				
 		            name: $scope.requester_name,
 		            subject: $scope.request_subject,
 		            dateExp:$scope.request_expiry.toString().substring(0,16),
@@ -45,8 +38,12 @@ main.controller('request_controller',
 		            date: Firebase.ServerValue.TIMESTAMP,
 		            accepted: false,
 					userID: authUser.uid,
-					tutorID: ''
+					tutorID: '',
+					userImg: '',
+					tutorImg: ''
+
 				}).then(function(){
+
 					$scope.message = "add request successfully!";
 				    $scope.requester_name= '';
 					$scope.request_subject ='';
@@ -54,9 +51,17 @@ main.controller('request_controller',
 					$scope.food_provide='';
 					$scope.location_tutor='';
 					$scope.descriptions='';
+					// $scope.message2 = userArray1;
 					// supersonic.ui.modal.show(modalView);
 					// supersonic.ui.model.hide();
-					supersonic.ui.layers.pop();
+					// supersonic.ui.layers.pop();
+
+					var modalView = new supersonic.ui.View("main#home");
+					var options = {
+					  animate: true
+					}
+
+					supersonic.ui.modal.show(modalView, options);
 				});
 					// $scope.message = "Add request successfully!";
 					
@@ -67,10 +72,6 @@ main.controller('request_controller',
 				supersonic.ui.initialView.show();
 				return auth.$unauth();
 	        };
-
-	        // $scope.deleteRequest = function(key) {
-	        // 	requestsInfoPersonal.$remove(key);
-	        // }; // delete request
 
 		} // userAuthenticated
 	});  // onAuth		

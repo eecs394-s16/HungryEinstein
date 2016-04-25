@@ -43,6 +43,7 @@ main.factory('Authentication',
 					// $rootScope.message = "welcome login in" + user.email;
 					user.email ='';
 					user.password='';
+					// Authentication.takephoto();
 					var animation = supersonic.ui.animate("fade");
    					supersonic.ui.initialView.dismiss(animation);
 				}).catch(function(error){
@@ -63,7 +64,8 @@ main.factory('Authentication',
 						firstname: user.firstname,
 						lastname: user.lastname,
 						email: user.email,
-						regID: regUser.uid
+						regID: regUser.uid,
+						img: ''
 					}); //user info
 					// $window.location.href = 'home.html';
 					// supersonic.ui.initialView.show();
@@ -73,5 +75,6 @@ main.factory('Authentication',
 					$rootScope.message = error.message;
 				}); // createUser
 			} //register
+
 		};  //return
 }]); //factory

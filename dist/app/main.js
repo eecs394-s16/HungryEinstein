@@ -433,6 +433,7 @@ main.factory('Authentication',
 					// $rootScope.message = "welcome login in" + user.email;
 					user.email ='';
 					user.password='';
+					// Authentication.takephoto();
 					var animation = supersonic.ui.animate("fade");
    					supersonic.ui.initialView.dismiss(animation);
 				}).catch(function(error){
@@ -453,7 +454,8 @@ main.factory('Authentication',
 						firstname: user.firstname,
 						lastname: user.lastname,
 						email: user.email,
-						regID: regUser.uid
+						regID: regUser.uid,
+						img: ''
 					}); //user info
 					// $window.location.href = 'home.html';
 					// supersonic.ui.initialView.show();
@@ -463,6 +465,7 @@ main.factory('Authentication',
 					$rootScope.message = error.message;
 				}); // createUser
 			} //register
+
 		};  //return
 }]); //factory
 main.controller('home_controller',
@@ -476,7 +479,10 @@ main.controller('home_controller',
 		if (authUser){
 			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
 			var userObj = $firebaseObject(authRef);
+                  var userArray = $firebaseArray(authRef);
+
 			$rootScope.currentUser = userObj;  // get currentUserInfo
+
 
             // request folder ----------------managing all requests 
             var refRequest = new Firebase(FIREBASE_URL + 'requests/');
@@ -485,7 +491,9 @@ main.controller('home_controller',
 		var requestUnaccepted = [];
             var requestUnacceptedKey = [];
             // $scope.message  = "nope!";
-	
+
+            // $scope.$apply ->  
+            //       $scope.myData = functionThatFetchesNewData()	
             // allRequests = [{name: 'Jimi', gender: "18"},{name: 'Peter', gender: '20'},{name: 'Bob', gender: '30'}];
             allRequests.$loaded().then(function(){
             	angular.forEach(allRequests, function(value, key){
@@ -496,13 +504,46 @@ main.controller('home_controller',
             				// requestsNum = requestNum + 1;
             				requestUnacceptedKey.push(value.$id);
             			}
-            		// angular.forEach(value, function(value, key){
 
+                              // update all imgs belong to this user account
+                              if(value.userID == authUser.uid) {
+                                    value.userImg = userArray.$getRecord("img").$value;
+
+                              }
+                              if(value.tutorID == authUser.uid) {
+                                    value.tutorImg = userArray.$getRecord("img").$value;
+                              }
+                             allRequests.$save(value).then(function(ref){
+
+                             });
+            		// angular.forEach(value, function(value, key){
             		// });
             	});
             });
 			// }
+            angular.forEach(allRequests, function(value, key){
+                        // travese all requests
+                              // if(value.accepted == false){
+                              //       requestUnaccepted.push(value);
+                              //       // $scope.acceptRec = value;
+                              //       // requestsNum = requestNum + 1;
+                              //       requestUnacceptedKey.push(value.$id);
+                              // }
 
+                              // update all imgs belong to this user account
+                              if(value.userID == authUser.uid) {
+                                    value.userImg = userArray.$getRecord("img").$value;
+
+                              }
+                              if(value.tutorID == authUser.uid) {
+                                    value.tutorImg = userArray.$getRecord("img").$value;
+                              }
+                             allRequests.$save(value).then(function(ref){
+
+                             });
+                        // angular.forEach(value, function(value, key){
+                        // });
+                  });
             // $scope.requestUnaccepted = requestUnaccepted;
     //      // $scope.requestNumber = requestNumber;
             $scope.allRequests = allRequests;
@@ -514,6 +555,7 @@ main.controller('home_controller',
             	var record = allRequests.$getRecord(firebID);
             	record.accepted = true;
                   record.tutorID = $rootScope.currentUser.$id;
+                  record.tutorImg = $rootScope.currentUser.img;
                   // $scope.message = $rootScope.currentUser.$id;
                   // $scope.myDate = record.dateExp;
                   // $scope.message  = myDate
@@ -546,19 +588,27 @@ main.controller('home_controller',
 
             };
 
+            $scope.cancelTutor = function(card){
+                  // $scope.message = card.accepted;
+                  card.accepted = false;
+                  $scope.message = card;
+                  allRequests.$save(card).then(function(){
 
-      //       $scope.requetsAll = allRequests;
-    		// $interval($scope.requetsAll, 100);
-
+                  });
+            }
             
+            $scope.removeRequest = function(card){
+                  allRequests.$remove(card).then(function(ref){
+
+                  });
+            }
 
 
-
-	        $scope.logout = function(){
+	     $scope.logout = function(){
 				$scope.message = "successfully logout!";
 				supersonic.ui.initialView.show();
 				return auth.$unauth();
-	        };
+	     };
 
 		} // userAuthenticated
 	});  // onAuth
@@ -576,7 +626,14 @@ main.controller('login_controller',
 
 		$scope.login = function() {
 			Authentication.login($scope.user);
-			
+			var options = {
+			  message: "Go to profile page to take a photo, please!",
+			  buttonLabel: "Sure!"
+			};
+
+			supersonic.ui.dialog.alert("To do!", options).then(function() {
+			  supersonic.logger.log("Alert closed.");
+			});
 		};
 		$scope.logout = function() {
 			Authentication.logout();
@@ -586,9 +643,9 @@ main.controller('login_controller',
 			Authentication.register($scope.user);
 		};
 
-		$scope.addRequest = function(){
-			Authentication.addRequest();
-		};
+		// $scope.addRequest = function(){
+		// 	Authentication.addRequest();
+		// };
 
 }]);
 
@@ -646,8 +703,8 @@ angular
 
 
 
-main.controller('request_controller',
-	['$scope','$rootScope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', '$firebaseAuth', 'supersonic',
+main.controller('profile_controller',
+	['$scope','$rootScope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', '$firebaseAuth','supersonic',
 	function($scope,$rootScope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, $firebaseAuth,supersonic){
 	var ref = new Firebase(FIREBASE_URL);
 	var auth = $firebaseAuth(ref);
@@ -657,20 +714,156 @@ main.controller('request_controller',
 		if (authUser){
 			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
 			var userObj = $firebaseObject(authRef);
+
+      var userArray = $firebaseArray(authRef);
 			$rootScope.currentUser = userObj;  // get currentUserInfo
+
+  //           // request folder ----------------managing all requests 
+  //           var refRequest = new Firebase(FIREBASE_URL + 'requests/');
+  //           var allRequests = $firebaseArray(refRequest);
+  //           // var requestsNum = 0;
+		// var requestUnaccepted = [];
+  //           var requestUnacceptedKey = [];
+  //           // $scope.message  = "nope!";
+	      
+  //           // allRequests = [{name: 'Jimi', gender: "18"},{name: 'Peter', gender: '20'},{name: 'Bob', gender: '30'}];
+  //           allRequests.$loaded().then(function(){
+  //           	angular.forEach(allRequests, function(value, key){
+  //           		// travese all requests
+  //           			if(value.accepted == false){
+  //           				requestUnaccepted.push(value);
+  //           				// $scope.acceptRec = value;
+  //           				// requestsNum = requestNum + 1;
+  //           				requestUnacceptedKey.push(value.$id);
+  //           			}
+  //           		// angular.forEach(value, function(value, key){
+
+  //           		// });
+  //           	});
+  //           });
+
+  //           userArray.$loaded().then(function(data){
+  //                 // angular.forEach(allRequests, function(value, key){
+  //                 //       // travese all requests
+  //                 //             if(value.accepted == false){
+  //                 //                   requestUnaccepted.push(value);
+  //                 //                   // $scope.acceptRec = value;
+  //                 //                   // requestsNum = requestNum + 1;
+  //                 //                   requestUnacceptedKey.push(value.$id);
+  //                 //             }
+  //                 //       // angular.forEach(value, function(value, key){
+
+  //                 //       // });
+  //                 // });
+  //           });
+		// 	// }
+
+  //           // $scope.requestUnaccepted = requestUnaccepted;
+  //   //      // $scope.requestNumber = requestNumber;
+  //           $scope.allRequests = allRequests;
+  //   //         // // $scope.requestsAll = allRequests;
+  //           $scope.accept = function(index){
+
+  //           	var firebID = requestUnacceptedKey[index];
+
+  //           	var record = allRequests.$getRecord(firebID);
+  //           	record.accepted = true;
+  //                 record.tutorID = $rootScope.currentUser.$id;
+  //                 // $scope.message = $rootScope.currentUser.$id;
+  //                 supersonic.ui.dialog.alert(record.dateExp);
+
+  //           	allRequests.$save(record).then(function(){
+  //                       $scope.message = "go accepted";
+  //           		requestUnacceptedKey.splice(index, 1);
+  //           	});
+
+		// 		// ref.on('child_changed', function() {
+		// 			// $scope.requestUnaccepted.$loaded(function(data){
+		// 		// $scope.message = "go in here";
+		// 			// });
+		// 		// });
+				
+  //           	// allRequests.$watch(function(data){
+  //           	// 	// function PersonListCtrl($scope, $http) {
+  //           	// 	$scope.requestUnaccepted.$loaded(function(){
+
+  //           	// 	});
+  //           	// });
+              $scope.getImgFromLib = function(){
+                var options = {
+                      quality: 50,
+                      allowEdit: true,
+                      targetWidth: 50,
+                      targetHeight: 50,
+                      encodingType: "png",
+                      destinationType: "dataURL"
+                  };
+                  supersonic.media.camera.getFromPhotoLibrary(options).then( function(result){
+                  // Do something with the image URI
+                        var record = userArray.$getRecord("img");
+                         // $scope.message = record.$value;
+                         // record.$value = "pppp";
+                         // $scope.message = record.$value;
+
+                        // $scope.message = "go into this ";
+                        // var record = userArray.$getRecord(firebID);
+                        record.$value = result;
+                        
+                        userArray.$save(record).then(function(){
+                              $scope.message = record.$value;
+                        // requestUnacceptedKey.splice(index, 1);
+                        });
+                  });
+              };
+              // $scope.message1 = record.$img;
+              $scope.takephoto = function(){
+                  // $scope.message ="go into this ";
+                  var options = {
+                    quality: 50,
+                    allowEdit: true,
+                    targetWidth: 50,
+                    targetHeight: 50,
+                    encodingType: "png",
+                    saveToPhotoAlbum: true,
+                    destinationType: "dataURL"
+                  };
+
+                  supersonic.media.camera.takePicture(options).then(function(result){
+                        var record = userArray.$getRecord("img");
+                         // $scope.message = record.$value;
+                         // record.$value = "pppp";
+                         // $scope.message = record.$value;
+
+                        // $scope.message = "go into this ";
+                        // var record = userArray.$getRecord(firebID);
+                        record.$value = result;
+                        
+                        userArray.$save(record).then(function(){
+                              $scope.message = record.$value;
+                        // requestUnacceptedKey.splice(index, 1);
+                        });
+                  });
+              };
+
+		} // userAuthenticated
+	});  //onAuth
+}]);
+
+main.controller('request_controller',
+	['$scope','$rootScope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', '$firebaseAuth', 'supersonic',
+	function($scope, $rootScope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, $firebaseAuth, supersonic){
+	var ref = new Firebase(FIREBASE_URL);
+	var auth = $firebaseAuth(ref);
+    // successfully login and extract login user's infomation
+
+	auth.$onAuth(function(authUser){
+		if (authUser){
+			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
+			var userObj = $firebaseObject(authRef);
+			var userArray = $firebaseArray(authRef);
+
+			// $rootScope.currentUser = userObj;  // get currentUserInfo
     		// $scope.message = "go into here";
-        // // ---------------GET ALL PERSONAL REQUESTS AND SCHEDUAL INFORMATION -------
-	       //  var requestsRef = new Firebase(FIREBASE_URL + 'users/' +
-	       //    $rootScope.currentUser.$id + '/requests');
-	       //  var requestsInfoPersonal = $firebaseArray(requestsRef);
-            
-	        // // get all requests and connect to html
-         //    $scope.allRequests = requestsInfoPersonal;
-
-            // requestsInfoPersonal.$watch(function(data){
-            // 	$rootScope.requestNumber = requestsInfoPersonal.length;
-            // });
-
 
             // request folder ----------------managing all requests 
             var refRequest = new Firebase(FIREBASE_URL + 'requests/');
@@ -679,11 +872,14 @@ main.controller('request_controller',
 			var options = {
 				animate: true
 				}
-
 			// var view = new supersonic.ui.View("bananas#show");
 			supersonic.ui.layers.push(modalView);	
+			// var record2 = userObj;
+			// $rootScope.message2 = authUser.uid;
+
 	        $scope.addRequest = function() {
-			requestsInfoAll.$add({
+				requestsInfoAll.$add({
+				
 		            name: $scope.requester_name,
 		            subject: $scope.request_subject,
 		            dateExp:$scope.request_expiry.toString().substring(0,16),
@@ -693,8 +889,12 @@ main.controller('request_controller',
 		            date: Firebase.ServerValue.TIMESTAMP,
 		            accepted: false,
 					userID: authUser.uid,
-					tutorID: ''
+					tutorID: '',
+					userImg: '',
+					tutorImg: ''
+
 				}).then(function(){
+
 					$scope.message = "add request successfully!";
 				    $scope.requester_name= '';
 					$scope.request_subject ='';
@@ -702,9 +902,17 @@ main.controller('request_controller',
 					$scope.food_provide='';
 					$scope.location_tutor='';
 					$scope.descriptions='';
+					// $scope.message2 = userArray1;
 					// supersonic.ui.modal.show(modalView);
 					// supersonic.ui.model.hide();
-					supersonic.ui.layers.pop();
+					// supersonic.ui.layers.pop();
+
+					var modalView = new supersonic.ui.View("main#home");
+					var options = {
+					  animate: true
+					}
+
+					supersonic.ui.modal.show(modalView, options);
 				});
 					// $scope.message = "Add request successfully!";
 					
@@ -715,10 +923,6 @@ main.controller('request_controller',
 				supersonic.ui.initialView.show();
 				return auth.$unauth();
 	        };
-
-	        // $scope.deleteRequest = function(key) {
-	        // 	requestsInfoPersonal.$remove(key);
-	        // }; // delete request
 
 		} // userAuthenticated
 	});  // onAuth		
