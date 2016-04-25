@@ -649,13 +649,34 @@ main.controller('login_controller',
 
 }]);
 
-angular
-.module('main')
-.controller('messages_controller', function($scope, supersonic, $firebaseArray) {
+// main.controller('login_controller',
+// 	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
+// 	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic){
+
+
+main.controller('messages_controller',
+	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic',
+	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic) {
 	var ref = new Firebase("https://hungryeinstein.firebaseio.com/messages");
 	// hardcoded for testing
 	var uID = "3333";
 	updateMessages();
+
+	$scope.debug = FIREBASE_URL;
+
+	var authRef = new Firebase(FIREBASE_URL);
+	var auth = $firebaseAuth(authRef);
+
+    // successfully login and extract login user's infomation
+	// auth.$onAuth(function(authUser){
+	// 	if (authUser){
+	// 		var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
+	// 		var userObj = $firebaseObject(authRef);
+
+	// 		var userArray = $firebaseArray(authRef);
+	// 		$rootScope.currentUser = userObj;
+	// 	}
+	// }
 
 	$scope.addMessage = function(){
 		console.log('Sending Message');
@@ -765,7 +786,7 @@ angular
 
 	// 	return toReturn;
 	// }
-});
+}]);
 
 
 

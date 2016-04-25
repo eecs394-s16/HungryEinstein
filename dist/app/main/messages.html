@@ -52,10 +52,12 @@
 		</super-navbar-title>
 	</super-navbar>
 
+	debug here
+	{{debug}}
 
 	<ul class="list">
 		<li class="item item-avatar" ng-repeat="item in messages | filter:convoFilter" ng-click="viewConversation(item)">
-			<img src="einstein.png">
+			<!-- <img src="einstein.png"> -->
 			<h2>{{getTitle(item)}}</h2>
 		</li>
 	</ul>

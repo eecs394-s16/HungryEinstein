@@ -42,4 +42,4 @@ module.exports =
   #
   initialView:
     id: "initialView"
-    location: "main#messages"
+    location: "main#login"
