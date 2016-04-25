@@ -1,0 +1,24 @@
+<div ng-controller="view_conversation_controller">
+
+	<super-navbar>
+		<super-navbar-title>
+			Conversation
+		</super-navbar-title>
+	</super-navbar>
+
+	<div class="card">
+		<div class="item item-text-wrap" ng-repeat="item in messages | filter:dialogueFilter">
+			{{item.text}}
+		</div>
+	</div>
+
+    <form ng-submit="addMessage()">
+		<label class="item item-input">
+			<i class="super-android-textsms"></i>
+			<input ng-model="text" type="text">
+		</label>
+		<button type="submit" class="button button-balanced">SEND</button>
+    </form>
+
+</div>
+
