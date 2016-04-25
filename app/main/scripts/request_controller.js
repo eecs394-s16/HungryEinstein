@@ -38,7 +38,7 @@ main.controller('request_controller',
 			requestsInfoAll.$add({
 		            name: $scope.requester_name,
 		            subject: $scope.request_subject,
-		            dateExp:$scope.request_expiry,
+		            dateExp:$scope.request_expiry.toString().substring(0,16),
 		            food: $scope.food_provide,
 		            location: $scope.location_tutor,
 		            description: $scope.descriptions,

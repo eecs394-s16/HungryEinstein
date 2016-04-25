@@ -32,15 +32,19 @@
   <h3>Tutor Requests</h3>
 
 
-  <div>
-    <!-- {{acceptRec}} -->
-    <ul>
-      <h4><li ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query">{{card.food}} for {{card.subject}} at {{card.location}}
-        <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query" >{{card.food}} for {{card.subject}} at {{card.location}}
+     <p><input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <p>
+            Student: {{card.name}},  Decription: {{card.description}}
+         </p>
+       </div>
+       <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>
 
-      </li></h4>
-    </ul>
-  </div>
+     </li></h4></i>
+
+   </ul>
 
   <!-- acceptRec is {{acceptRec}} -->
   <!-- message is {{message}} -->

@@ -36,7 +36,8 @@
 </head>
 <body ng-app="main">
 
-<div class="padding" ng-controller="schedule_controller">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<div class="padding" ng-controller="home_controller">
 
   <super-navbar>
     <super-navbar-title>
@@ -46,39 +47,73 @@
 
 <h3><center>Hey {{currentUser.firstname}}! This is your schedule.</center></h3>
 
+<h5> Hey {{ currentUser.firstname }}, these are your tutoring hours </h5>
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {tutorID : currentUser.$id, accepted:true}" >{{card.dateExp}}
+    <p> <button type = "button">Cancel</button> </p>
+     <p><input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <p>
+            Student: {{card.name}},  Decription: {{card.description}}
+         </p>
+       </div>
+       <!-- <button class="button button-small button-positive" ng-click="accept(key)">Accept</button> -->
 
-<ul>
-  <li ng-repeat = "request in req">{{ request.text }}: {{ request.time }} </li>
-</ul>
+     </li></h4></i>
 
-<!-- <h3><center>Hey {{currentRequest}}! This is your schedule.</center></h3> -->
+   </ul>
 
-<!-- Change "Tony" to the database name -->
 
-<div class="card">
-  <div class="item item-text-wrap">
-  	<!-- Pull info from database -->
-    Monday, June 12th. EECS 111. Main Library. <br>
-    <button ng-click="cancel()" class="button button-block button-negative">
-        Cancel
-    </button>
-  </div>
+<h5> Hey {{ currentUser.firstname }}, these are the hours you are getting tutored</h5>
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}" >{{card.dateExp}}
+    <p><button type = "button">Cancel</button></p>
+    <p> <input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <p>
+            Student: {{card.name}},  decription is {{card.description}}
+          </p>
 
-    <div class="item item-text-wrap">
-    Tuesday, June 13th. EECS 394. South Campus.<br>
-    <button ng-click="cancel()" class="button button-block button-negative">
-        Cancel
-    </button>
+       </div>
+     </li></h4></i>
+<!--      <button class = "button button-assertive">Cancel</button> -->
 
-    <button ng-click="NEEDTOIMPLEMENT()" class="button button-block button-negative">
-        Tutor
-    </button>
+   </ul>
 
-  </div>
-  </div>
+
+
+<h5> Hey {{ currentUser.firstname }}, these are your requests that haven't been accepted. Cancel if you've changed your mind</h5>
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: false}">{{card.dateExp}}
+    <!-- <p><button type = "button">Cancel</button></p> -->
+    <p> <input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <p>
+            Student: {{card.name}},  decription is {{card.description}}
+         </p>
+           
+
+       </div>
+       <p><button type = "button">Cancel</button></p>
+       <!-- <button class="button button-small button-positive" ng-click="accept(key)">Accept</button> -->
+
+     </li></h4></i>
+
+   </ul>
+
+<!-- <h5> Hey {{ currentUser.firstname }}, these are appointments you attended. Rate your tutor!</h5>
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}">{{card.subject}}
+    <p><button type = "button">Cancel</button></p>
+       <p><button type = "button">Rate tutor {{ card.name }}!</button></p>
+     </li></h4></i>
+
+   </ul>
+ -->
+
+
 </div>
 
-</div>
 
 
 </body>

@@ -48,11 +48,18 @@ main.controller('home_controller',
             	record.accepted = true;
                   record.tutorID = $rootScope.currentUser.$id;
                   // $scope.message = $rootScope.currentUser.$id;
+                  // $scope.myDate = record.dateExp;
+                  // $scope.message  = myDate
+                  // alert(record.dateExp);
+
+
 
             	allRequests.$save(record).then(function(){
                         $scope.message = "go accepted";
             		requestUnacceptedKey.splice(index, 1);
             	});
+
+
 
 				// ref.on('child_changed', function() {
 					// $scope.requestUnaccepted.$loaded(function(data){
@@ -71,8 +78,14 @@ main.controller('home_controller',
 				// }
 
             };
+
+
       //       $scope.requetsAll = allRequests;
     		// $interval($scope.requetsAll, 100);
+
+            
+
+
 
 	        $scope.logout = function(){
 				$scope.message = "successfully logout!";
