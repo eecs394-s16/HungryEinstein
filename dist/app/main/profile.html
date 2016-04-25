@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+  window.addEventListener('WebComponentsReady', function() {
+    supersonic.app.splashscreen.hide();
+  });
+  </script>
+  <!-- Cloud resource definition file for Supersonic Data -->
+  <script src="/cloud-resources.js"></script>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <title>profile</title>
+
+  <link rel="stylesheet" href="/components/supersonic/css/supersonic.css" />
+  <link rel="stylesheet" href="/app/common/stylesheets/application.css" />
+  <link rel="import" href="/components/supersonic/components/import.html">
+
+  <script src="http://localhost/cordova.js"></script>
+  <script src="/components/steroids-js/steroids.js"></script>
+  <script src="/components/angular/angular.js"></script>
+  <script src="/components/supersonic/supersonic.js"></script>
+  <script src="/components/webcomponentsjs/webcomponents.js"></script>
+
+  <!-- firebase dependencies -->
+  <script src="/components/firebase/firebase.js"></script>
+  <script src="/components/angularfire/dist/angularfire.min.js"></script>
+
+  
+  <script src="/app/common.js"></script>
+  
+  <script src="/app/main.js"></script>
+  
+  
+</head>
+<body ng-app="main">
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<div class="padding" ng-controller="home_controller">
+
+  <super-navbar>
+    <super-navbar-title>
+      Your User Profile
+    </super-navbar-title>
+  </super-navbar>
+
+<h3><center>Hey {{currentUser.firstname}}! This is your schedule.</center></h3>
+
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {tutorID : currentUser.$id, accepted:true}" >{{card.dateExp}}
+    <p> <button type = "button">Cancel</button> </p>
+     <p><input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <p>
+            Student: {{card.name}},  Decription: {{card.description}}
+         </p>
+       </div>
+
+     </li></h4></i>
+
+   </ul>
+
+<h5> Hey {{ currentUser.firstname }}, these are the hours you are getting tutored</h5>
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}" >{{card.dateExp}}
+    <p><button type = "button">Cancel</button></p>
+    <p> <input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <p>
+            Student: {{card.name}},  decription is {{card.description}}
+          </p>
+
+       </div>
+     </li></h4></i>
+<!--      <button class = "button button-assertive">Cancel</button> -->
+
+   </ul>
+
+
+
+<h5> Hey {{ currentUser.firstname }}, these are your requests that haven't been accepted. Cancel if you've changed your mind</h5>
+<ul class = "list">
+  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: false}">{{card.dateExp}}
+    <!-- <p><button type = "button">Cancel</button></p> -->
+    <p> <input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <p>
+            Student: {{card.name}},  decription is {{card.description}}
+         </p>
+           
+
+       </div>
+       <p><button type = "button">Cancel</button></p>
+       <!-- <button class="button button-small button-positive" ng-click="accept(key)">Accept</button> -->
+
+     </li></h4></i>
+
+   </ul>
+
+</div>
+
+
+
+</body>
+</html>

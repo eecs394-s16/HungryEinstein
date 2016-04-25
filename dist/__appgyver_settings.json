@@ -22,6 +22,12 @@
       "id": "schedule",
       "title": "Schedule",
       "target_url": "http://localhost/app/main/schedule.html"
+    },
+    {
+      "position": 3,
+      "id": "profile",
+      "title": "Profile",
+      "target_url": "http://localhost/app/main/profile.html"
     }
   ],
   "configuration": {

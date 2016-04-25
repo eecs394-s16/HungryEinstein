@@ -71,3 +71,19 @@ tab-bar-item#index {
 tab-bar-item#internet {
   background-image: url(icons/search.svg);
 }
+
+tab-bar-item#home {
+  background-image: url(icons/home.svg);
+}
+
+tab-bar-item#messages {
+  background-image: url(icons/web.svg);
+}
+
+tab-bar-item#schedule {
+  background-image: url(icons/calendar.svg);
+}
+
+tab-bar-item#profile {
+  background-image: url(icons/people.svg);
+}

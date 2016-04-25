@@ -19,6 +19,11 @@ module.exports =
       id: "schedule"
       location: "main#schedule"
     }
+    {
+      title: "Profile"
+      id: "profile"
+      location: "main#profile"
+    }
   ]
 
   # rootView:
