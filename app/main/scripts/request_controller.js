@@ -22,7 +22,7 @@ main.controller('request_controller',
 				animate: true
 				}
 			// var view = new supersonic.ui.View("bananas#show");
-			supersonic.ui.layers.push(modalView);	
+			//supersonic.ui.layers.push(modalView);	
 			// var record2 = userObj;
 			// $rootScope.message2 = authUser.uid;
 
