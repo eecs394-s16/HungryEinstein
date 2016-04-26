@@ -626,14 +626,14 @@ main.controller('login_controller',
 
 		$scope.login = function() {
 			Authentication.login($scope.user);
-			var options = {
-			  message: "Go to profile page to take a photo, please!",
-			  buttonLabel: "Sure!"
-			};
+			// var options = {
+			//   message: "Go to profile page to take a photo, please!",
+			//   buttonLabel: "Sure!"
+			// };
 
-			supersonic.ui.dialog.alert("To do!", options).then(function() {
-			  supersonic.logger.log("Alert closed.");
-			});
+			// supersonic.ui.dialog.alert("To do!", options).then(function() {
+			//   supersonic.logger.log("Alert closed.");
+			// });
 		};
 		$scope.logout = function() {
 			Authentication.logout();
@@ -839,8 +839,8 @@ main.controller('profile_controller',
                 var options = {
                       quality: 50,
                       allowEdit: true,
-                      targetWidth: 50,
-                      targetHeight: 50,
+                      targetWidth: 150,
+                      targetHeight: 150,
                       encodingType: "png",
                       destinationType: "dataURL"
                   };
@@ -867,8 +867,8 @@ main.controller('profile_controller',
                   var options = {
                     quality: 50,
                     allowEdit: true,
-                    targetWidth: 50,
-                    targetHeight: 50,
+                    targetWidth: 150,
+                    targetHeight: 150,
                     encodingType: "png",
                     saveToPhotoAlbum: true,
                     destinationType: "dataURL"
@@ -919,7 +919,7 @@ main.controller('request_controller',
 				animate: true
 				}
 			// var view = new supersonic.ui.View("bananas#show");
-			supersonic.ui.layers.push(modalView);	
+			//supersonic.ui.layers.push(modalView);	
 			// var record2 = userObj;
 			// $rootScope.message2 = authUser.uid;
 

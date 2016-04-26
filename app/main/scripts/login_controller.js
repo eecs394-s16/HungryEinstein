@@ -10,14 +10,14 @@ main.controller('login_controller',
 
 		$scope.login = function() {
 			Authentication.login($scope.user);
-			var options = {
-			  message: "Go to profile page to take a photo, please!",
-			  buttonLabel: "Sure!"
-			};
+			// var options = {
+			//   message: "Go to profile page to take a photo, please!",
+			//   buttonLabel: "Sure!"
+			// };
 
-			supersonic.ui.dialog.alert("To do!", options).then(function() {
-			  supersonic.logger.log("Alert closed.");
-			});
+			// supersonic.ui.dialog.alert("To do!", options).then(function() {
+			//   supersonic.logger.log("Alert closed.");
+			// });
 		};
 		$scope.logout = function() {
 			Authentication.logout();
