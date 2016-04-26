@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+  window.addEventListener('WebComponentsReady', function() {
+    supersonic.app.splashscreen.hide();
+  });
+  </script>
+  <!-- Cloud resource definition file for Supersonic Data -->
+  <script src="/cloud-resources.js"></script>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <title>tutorProfile</title>
+
+  <link rel="stylesheet" href="/components/supersonic/css/supersonic.css" />
+  <link rel="stylesheet" href="/app/common/stylesheets/application.css" />
+  <link rel="import" href="/components/supersonic/components/import.html">
+
+  <script src="http://localhost/cordova.js"></script>
+  <script src="/components/steroids-js/steroids.js"></script>
+  <script src="/components/angular/angular.js"></script>
+  <script src="/components/supersonic/supersonic.js"></script>
+  <script src="/components/webcomponentsjs/webcomponents.js"></script>
+
+  <!-- firebase dependencies -->
+  <script src="/components/firebase/firebase.js"></script>
+  <script src="/components/angularfire/dist/angularfire.min.js"></script>
+
+  
+  <script src="/app/common.js"></script>
+  
+  <script src="/app/main.js"></script>
+  
+  
+</head>
+<body ng-app="main">
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<div class="padding" ng-controller="profile_controller">
+
+  <super-navbar>
+    <super-navbar-title>
+      Profile
+    </super-navbar-title>
+  </super-navbar>
+<!-- 	 <button class= "button" ng-click="takephoto()">Take a photo</button> -->
+	 <!-- <center><button class = "button" ng-click = "getImgFromLib()"> Update photo </button><br><br> -->
+	 <center><img src="http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/einstein1_7.jpg" height="150"></center>
+      <h2 class = "padding-vertical" >Hungry Einstein</h2>
+
+   <p style="font-size:20px"><strong>Major</strong>: Computer Engineering<br>
+   <strong>Skills</strong>: Supersonic, Angular JS, Github<br>
+   <strong>Interesting fact</strong>: Science and religion can coexist <br>
+   <strong>Tutor Rating</strong>: 4.5/5</p>  </center>
+</div>
+
+</body>
+</html>

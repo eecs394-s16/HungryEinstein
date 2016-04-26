@@ -51,8 +51,13 @@
             <p><b>Food:</b> {{card.food}}</p>
             <p><b>Location:</b> {{card.location}}</p>
           </p>
-       <button class ="button button-small button-balanced" ng-click="viewTutorProfile(card)">View Tutor Profile </button></div>
-       <button class ="button button-small button-assertive" ng-click="removeRequest(card)">Cancel</button>
+          <super-navigate location="main#tutorProfile">
+
+          <button class ="button button-small button-balanced" ng-click="viewTutorProfile(card)">View Tutor Profile </button></div> 
+        </super-navigate>
+        <button class ="button button-small button-assertive" ng-click="removeRequest(card)">Cancel</button>
+  
+  
 
 
      </li></h4></i>
