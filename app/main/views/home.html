@@ -36,7 +36,7 @@
   <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query" >{{card.food}} for {{card.subject}} at {{card.location}}
      <p><input type ="checkbox" ng-model="show_detail"> View Details
     <div ng-show="show_detail"></p>
-      <p>  <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}"> Student: {{card.name}},  Decription: {{card.description}}
+      <p>  <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}" height="50"> Student: {{card.name}},  Decription: {{card.description}}
          </p>
        </div>
        <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>

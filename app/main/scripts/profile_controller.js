@@ -88,8 +88,8 @@ main.controller('profile_controller',
                 var options = {
                       quality: 50,
                       allowEdit: true,
-                      targetWidth: 50,
-                      targetHeight: 50,
+                      targetWidth: 150,
+                      targetHeight: 150,
                       encodingType: "png",
                       destinationType: "dataURL"
                   };
@@ -116,8 +116,8 @@ main.controller('profile_controller',
                   var options = {
                     quality: 50,
                     allowEdit: true,
-                    targetWidth: 50,
-                    targetHeight: 50,
+                    targetWidth: 150,
+                    targetHeight: 150,
                     encodingType: "png",
                     saveToPhotoAlbum: true,
                     destinationType: "dataURL"
