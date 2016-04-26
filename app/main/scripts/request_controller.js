@@ -17,12 +17,13 @@ main.controller('request_controller',
             // request folder ----------------managing all requests 
             var refRequest = new Firebase(FIREBASE_URL + 'requests/');
             var requestsInfoAll = $firebaseArray(refRequest);
-			var modalView = new supersonic.ui.View("main#home");
+
+			var modalView1 = new supersonic.ui.View("main#home");
 			var options = {
 				animate: true
 				}
 			// var view = new supersonic.ui.View("bananas#show");
-			//supersonic.ui.layers.push(modalView);	
+			supersonic.ui.layers.push(modalView1);	
 			// var record2 = userObj;
 			// $rootScope.message2 = authUser.uid;
 
@@ -54,7 +55,7 @@ main.controller('request_controller',
 					// $scope.message2 = userArray1;
 					// supersonic.ui.modal.show(modalView);
 					// supersonic.ui.model.hide();
-					// supersonic.ui.layers.pop();
+					
 
 					var modalView = new supersonic.ui.View("main#home");
 					var options = {
@@ -62,10 +63,17 @@ main.controller('request_controller',
 					}
 
 					supersonic.ui.modal.show(modalView, options);
+					// reloadpage();
+
+					
 				});
 					// $scope.message = "Add request successfully!";
-					
+				
 	        }; // addRequest
+
+	        function reloadpage(){
+	        	supersonic.ui.layers.pop();
+	        }
 
 	        $scope.logout = function(){
 				$scope.message = "successfully logout!";

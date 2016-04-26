@@ -1,22 +1,22 @@
 <div ng-controller="home_controller">
   <super-navbar>
     <super-navbar-title>
-      Home
+      Hungry Einstein
     </super-navbar-title>
-    <super-navbar-button ng-click="logout()" side = "right">Logout
-    </super-navbar-button>
+<!--     <super-navbar-button ng-click="logout()" side = "right">Logout
+    </super-navbar-button> -->
   </super-navbar>
 
-  <div class="textintro" ng-show="currentUser">
+<!--   <div class="textintro" ng-show="currentUser">
     <center>
-      <h1 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h1>
-      <!--         <h2 class = "padding-vertical" >Here are the current listings: </h2> -->
+      <h2 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h2>
+      <!--         <h2 class = "padding-vertical" >Here are the current listings: </h2> 
     </center>
-  </div>
-
+  </div> -->
+<body>
   <!-- search input-->
-  <div class = "item item-input item-stacked-label">
-    <label class="item item-input">
+  <div class = "list list-inset search cf">
+    <label class="item item-input" >
       <i class="icon super-search placeholder-icon"></i>
       <input ng-model="query" type="text" placeholder="Enter a food or subject">
     </label>
@@ -24,55 +24,53 @@
 
   <!-- message: {{message}} -->
   <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
-<!--   <div>
-    <span ng-show="requestNumber"> Requests Number is : {{requestNumber}}</span>
-  </div> -->
 
 
-  <p><center><h3>Tutor Requests:</h3></center></p>
+   <div class="title"><center><h3>Tutor Requests <span class="badge" ng-show="requestNumber" >{{requestNumber}}</span>:</h3>
+  </center></div>
 
 
-<ul class = "list">
-  <h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query" >
-  <div>
-      <span class="food">{{card.food}} </span> for 
-      <span class="subject"> {{card.subject}}</span> at 
-      <span class = "location">{{card.location}}</span>
+<ul class = "userlist cf">
+  <h4><li class = " item item-button-right" ng-repeat = "(key, card) in allRequests | filter : query | filter: {accepted : false} " >
+  <div class= "request_info">
+      <span >{{card.food}} </span>  for 
+      <span > {{card.subject}}</span>  at 
+      <span >{{card.location}}</span>
   </div>  
-  <p><input type ="checkbox" ng-model="show_detail"> View Details </p>
-  <div ng-show="show_detail"> 
-  <p>       <!-- This is user image-->
-    <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}"> 
-      <p><b>Student:</b> {{card.name}}</p>
-      <p><b>subject:</b> {{card.subject}}</p>
-      <p><b>Decription:</b> {{card.description}}</p> 
-      <p><b>Food:</b> {{card.food}}</p>
-      <p><b>location:</b> {{card.location}}</p>
-  </p>
- </div>
- <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>
+  <input style="float:left; margin-left: 10px"type ="checkbox" ng-model="show_detail"> <span class="checkB">View Details</span>
+  <div class="row card" ng-show="show_detail"> 
+        <!-- This is user image-->
+    <img class="col col-33" style = "max-height: 80px"src="data:image/png;base64,{{card.userImg}}"> 
+    <div class="col col-75">
+      <div class="row">
+        <span class="col col-75"> <span class="guideInfo">Student</span> {{card.name}}</span> 
+      </div>
+     <!--  <div class= "row">
+        <span class="col col-75">subject:{{card.subject}}</span>
+      </div> -->
+      <div class="row">
+        <span class="col col-75">Decription:{{card.description}}</span>
+      </div>
+    <!--   <div class="row">
+        <span class="col col-75">Food: {{card.food}}</span>
+      </div> -->
+    </div>
 
+  </div>
+        <button class="button button-small button-positive" style="margin-top:10px" ng-click="accept(key)">Accept</button>
 
-<!-- . -->
-
-<!--      <p><input type ="checkbox" ng-model="show_detail"> View Details
-    <div ng-show="show_detail"></p>
-      <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}">  
-        <span class="detail_name">Student</span> 
-        <span class="detail_info"> {{card.name}}</span>
-        <span class= "detail_name">Decription</span> 
-        <span class= "detail_info">{{card.description}}</span></div> -->
-       
      </li>
    </h4>
-</ul>
+</ul> 
+</body>
+
 
   <!-- acceptRec is {{acceptRec}} -->
   <!-- message is {{message}} -->
   <!-- {{requetsAll}} -->
   <!-- {{test}} -->
-  <super-navigate location="main#request">
-    <button  class="button button-full button-calm">Find a Tutor</button>
+  <super-navigate location="main#request" style="color:green">
+    <button  class="button button-full button-calm" >Find a Tutor</button>
   </super-navigate>
 <!-- message : {{message}} -->
- </div>
+</div>

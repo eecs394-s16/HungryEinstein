@@ -44,8 +44,11 @@
     </super-navbar-title>
   </super-navbar>
   <!-- message is {{message}} -->
-  <center> <h2> {{currentUser.firstname}}, fill out a request here</h2></center>
-    <form name = "requestForm" ng-submit="addRequest()">
+  <center class="title"> <h3> Fill out this request form</h3></center>
+
+    <form class="req_form" name = "requestForm" ng-submit="addRequest()">
+      <fieldset>
+        
       <div class ="form-group">
         <h4><span>Your Name:</span></h4>
         <input type='text' class="form-control" ng-model="requester_name" placeholder="Ariana" ng-required = "true">
@@ -93,6 +96,7 @@
         Must have request expiration!
        </p>
       </div>
+  </fieldset>
 
       <button type ="submit" class ="button button-full button-positive">Submit Request</button>
   </form>

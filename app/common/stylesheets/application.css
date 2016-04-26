@@ -1,5 +1,158 @@
 .supersonic-navbar-mock {
-  background-color: #00B5FF !important;
+  background-color: #EF8FFD;
   text-align: center;
   font-weight: 600;
+}
+body{
+	/*background-color: #9999ff;*/
+
+}
+
+.textintro h3 {
+  margin: 0;
+  padding: 0;
+  margin-top: 20px;
+}
+
+fieldset {
+  margin: 10px 0;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 4px 7px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: purple;
+  border-radius: 15px;
+}
+.search {
+  background: #F5F5F5;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 20px 30px;
+  border-radius: 4px;
+  text-align: left;
+  font-size: 1.1rem;
+  font-family: Lato, 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+}
+.req_form span{
+  font-family: Lato, 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+
+/*   font: inherit;
+*/   /*font-family: 'Lato', serif;*/
+   font-weight: 400;
+}
+.search label {
+  font-size: 1rem;
+  font-family: Lato, 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  color: #576E75;
+}
+
+.title h3 {
+  margin-top: 10px;
+  /*margin-bottom: 5px;*/
+  color: #124E61;
+  /*margin-bottom: 10px;*/
+}
+
+.userlist {
+  /*width: 100%;*/
+  margin: 0 auto;
+  opacity: .95;
+  /*z-index: 10;*/
+  /*margin-top: 20px;*/
+/*  background-color: #FD4199;
+*/}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+.userlist ul {
+  margin: 0;
+  padding: 0;
+}
+
+.userlist li {
+  /*width: 100%;*/
+  /*float: left;*/
+  padding: 10px;
+  /*background-color: #FEF39B;*/
+  /*margin-left: 5px;*/
+  /*margin-right: 5px;*/
+  /*margin-bottom: 10px;*/
+  /*border: 1px line transparent;*/
+  opacity: .95;
+  border-radius: 3px;
+  border: 1px solid  #E7A0FF;
+  box-shadow: 0 1px 0 rgba(0,0,0,.25);
+
+}
+
+
+.userlist .request_info {
+  /*display: block;*/
+  /*float: left;*/
+  text-align: bottom;
+  font-family: Lato, 'Helvetica Nueue', Helvetica, Arial, sans-serif;
+  	
+}
+
+.userlist .request_info span {
+	font-size: 25px;
+	/*font-weight: 400;*/
+	margin-left: 10px;
+	opacity: .95;
+/*  border-radius: 4px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 1px 0 rgba(0,0,0,.25);
+*/
+}
+.userlist .vMore {
+  display: block;
+  float: left;
+  /*text-align: bottom;*/
+  margin-left: 10px;
+}
+.userlist .checkB{
+	font-size: 15px;
+	margin-left: 10px;
+	color: purple;
+}
+/*.tooltip {
+  position: relative;
+}*/
+/*
+.detial span{
+	col col-75
+}*/
+
+.card {
+  /*background: white;*/
+/*  width: 100%;
+  max-width: 850px;*/
+  background-color: #E7A0FF; 
+  margin-left: auto;
+  margin-right: auto;
+  /*padding: 10px 40px;*/
+  /*text-align: center;*/
+  /*position: relative;*/
+  opacity: .95;
+  border-radius: 3px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 1px 0 rgba(0,0,0,.25);
 }
