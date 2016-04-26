@@ -610,6 +610,11 @@ main.controller('home_controller',
 				return auth.$unauth();
 	     };
 
+            $scope.updateRating = function(){
+                  supersonic.ui.dialog.alert("Rating Successfully Submitted!")
+
+           };
+
 		} // userAuthenticated
 	});  // onAuth
 }]);

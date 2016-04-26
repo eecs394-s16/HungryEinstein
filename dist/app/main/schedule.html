@@ -45,86 +45,115 @@
     </super-navbar-title>
   </super-navbar>
 
-<h3><center>Hey {{currentUser.firstname}}! This is your schedule.</center></h3>
+<!-- <h3><center>Hey {{currentUser.firstname}}! This is your schedule.</center></h3> -->
 
 <h5> Hey {{ currentUser.firstname }}, these are your tutoring hours </h5>
 <ul class = "list">
-  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {tutorID : currentUser.$id, accepted:true}" >{{card.dateExp}}
+  <h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {tutorID : currentUser.$id, accepted:true}" >{{card.dateExp}}
     
      <p><input type ="checkbox" ng-model="show_detail"> View Details
     <div ng-show="show_detail"></p>
       <p>
            <!-- This is user image-->
            <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}"> 
-            Student: {{card.name}},
-            subject: {{card.subject}},
-            Decription: {{card.description}}, 
-            Food: {{card.food}},
-            location: {{card.location}}
+            <p><b>Student:</b> {{card.name}}</p>
+            
+            <p><b>Subject:</b> {{card.subject}}</p>
+            <p><b>Decription:</b> {{card.description}}</p> 
+            <p><b>Food:</b> {{card.food}}</p>
+            <p><b>Location:</b> {{card.location}}</p>
          </p>
        </div>
-       <p> <button class ="button button-small button-assertive" ng-click="cancelTutor(card)">Cancel</button> </p>
-       <!-- <button class="button button-small button-positive" ng-click="accept(key)">Accept</button> -->
+       <button class ="button button-small button-assertive" ng-click="cancelTutor(card)">Cancel</button>
 
-     </li></h4></i>
+
+     </li></h4>
 
    </ul>
+
+<hr style="border: 2px groove #939;">
 
 
 <h5> Hey {{ currentUser.firstname }}, these are the hours you are getting tutored</h5>
 <ul class = "list">
-  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}" >{{card.dateExp}}
+  <h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}" >{{card.dateExp}}
     
-    <p> <input type ="checkbox" ng-model="show_detail"> View Details
+    <p align> <input type ="checkbox" ng-model="show_detail"> View Details
     <div ng-show="show_detail"></p>
       <p>
             <!-- This is tutor's image-->
            <img style = "max-height: 50px"src="data:image/png;base64,{{card.tutorImg}}"> 
-            subject: {{card.subject}},
-            Decription: {{card.description}}, 
-            Food: {{card.food}},
-            location: {{card.location}},
+            
+            <p><b>Subject:</b> {{card.subject}}</p>
+            <p><b>Decription:</b> {{card.description}}</p> 
+            <p><b>Food:</b> {{card.food}}</p>
+            <p><b>Location:</b> {{card.location}}</p>
           </p>
-       </div>
-       <p><button class ="button button-small button-assertive" ng-click="removeRequest(card)">Cancel</button></p>
+       <button class ="button button-small button-balanced" ng-click="viewTutorProfile(card)">View Tutor Profile </button></div>
+       <button class ="button button-small button-assertive" ng-click="removeRequest(card)">Cancel</button>
+
+
      </li></h4></i>
-<!--      <button class = "button button-assertive">Cancel</button> -->
+
 
    </ul>
 
+<hr style="border: 2px groove #939;">
 
 
 <h5> Hey {{ currentUser.firstname }}, these are your requests that haven't been accepted. Cancel if you've changed your mind</h5>
 <ul class = "list">
-  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: false}">{{card.dateExp}}
+  <h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: false}">{{card.dateExp}}
     <!-- <p><button type = "button">Cancel</button></p> -->
-    <p> <input type ="checkbox" ng-model="show_detail"> View Details
+    <p align> <input type ="checkbox" ng-model="show_detail"> View Details
     <div ng-show="show_detail"></p>
       <p>
-            Student: {{card.name}},  decription is {{card.description}}
+            <b>Student:</b> {{card.subject}} for {{card.food}}
          </p>
            
 
        </div>
-       <p><button class ="button button-small button-assertive" ng-click="removeRequest(card)">Cancel</button></p>
-       <!-- <button class="button button-small button-positive" ng-click="accept(key)">Accept</button> -->
+       <button class ="button button-small button-assertive" ng-click="removeRequest(card)">Cancel</button>
 
      </li></h4></i>
 
    </ul>
 
-<!-- <h5> Hey {{ currentUser.firstname }}, these are appointments you attended. Rate your tutor!</h5>
+<hr style="border: 2px groove #939;">
+
+<h5> Hey {{ currentUser.firstname }}, these are appointments you attended. Rate your tutor!</h5>
 <ul class = "list">
   <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}">{{card.subject}}
-    <p><button type = "button">Cancel</button></p>
-       <p><button type = "button">Rate tutor {{ card.name }}!</button></p>
+    <p><input type ="checkbox" ng-model="show_detail"> Rate your Tutor </p>
+      <div ng-show="show_detail">
+        <div class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              <b>Your Rating</b>
+            </div>
+            <select>
+              <option>1 (Not happy)</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5 (Extremely happy)</option>
+            </select>
+          </label>
+          
+        </div>
+        <button class ="button button-small button-royal" ng-click="updateRating()">Submit Rating</button>
+      </div>
+
+      
+    
      </li></h4></i>
 
    </ul>
- -->
-<!-- {{message}} -->
+
+
 
 </div>
+
 
 
 
