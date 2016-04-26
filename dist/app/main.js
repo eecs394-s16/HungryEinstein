@@ -496,18 +496,18 @@ main.controller('home_controller',
             //       $scope.myData = functionThatFetchesNewData()	
             // allRequests = [{name: 'Jimi', gender: "18"},{name: 'Peter', gender: '20'},{name: 'Bob', gender: '30'}];
             // allRequests.$loaded().then(function(){
+            // allRequests.$loaded().then(function(data) {
+            //       // loaddata(data);
+            //       $rootScope.requestNumber = loaddata(allRequests);
+            // }); //Make sure meeting data is loaded
+
+            // allRequests.$watch(function(data) {
+            //       // loaddata(data);
+            //       $rootScope.requestNumber = loaddata(allRequests);
+            // });
+
+            // function loaddata(allRequests){
             allRequests.$loaded().then(function(data) {
-                  // loaddata(data);
-                  $rootScope.requestNumber = loaddata(allRequests);
-            }); //Make sure meeting data is loaded
-
-            allRequests.$watch(function(data) {
-                  // loaddata(data);
-                  $rootScope.requestNumber = loaddata(allRequests);
-            });
-
-            function loaddata(allRequests){
-                  // allRequests.$loaded().then(function(data) {
 
                   var requestsNum = 0;
             	angular.forEach(allRequests, function(value, key){
@@ -535,9 +535,9 @@ main.controller('home_controller',
             	});  // angular for each 
 
                   // });
-                  return requestsNum;
-            };
-            // });
+                  // return requestsNum;
+            // };
+            });// $load
 
 			// }
             angular.forEach(allRequests, function(value, key){
