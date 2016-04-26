@@ -6,6 +6,8 @@
 		</super-navbar-title>
 	</super-navbar>
 
+	debug: ->{{debug}}<-
+
 	<div class="card">
 		<div class="item item-text-wrap" ng-repeat="item in messages | filter:dialogueFilter">
 			{{item.text}}

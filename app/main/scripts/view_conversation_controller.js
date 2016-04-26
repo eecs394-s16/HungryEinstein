@@ -1,48 +1,70 @@
-angular
-.module('main')
-.controller('view_conversation_controller', function($scope, supersonic, $firebaseArray) {
+main.controller('view_conversation_controller',
+	['$scope', 'Authentication', '$firebaseObject', 'FIREBASE_URL', '$firebaseArray', 'supersonic', '$firebaseAuth',
+	function($scope, Authentication, $firebaseObject, FIREBASE_URL, $firebaseArray, supersonic, $firebaseAuth) {
+	var global = {};
+	// onload, get passed in values
+	supersonic.ui.views.current.params.onValue(function(data){
+		tempuid = global.uid;
+		global = data;
+		global.uid = tempuid;
+	});
+
+	// messages stuff
 	var ref = new Firebase("https://hungryeinstein.firebaseio.com/messages");
-	// hardcoded for testing
-	var uID = "3333";
+
+	// current user stuff
+	var authRef = new Firebase("https://hungryeinstein.firebaseio.com");
+		// supersonic.ui.dialog.alert("got to authRef");
+		//supersonic.ui.dialog.alert("url is: " + FIREBASE_URL + "users/");
+		var auth = $firebaseAuth(authRef);
+	    // successfully login and extract login user's infomation
+		auth.$onAuth(function(authUser){
+		if (authUser){
+			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);
+			// supersonic.ui.dialog.alert("getting uid");
+			global.uid = authUser.uid;
+			// global.uid = authUser.uid;
+			// authUser.uid is user's uid
+
+		}
+	});
 
 	updateMessages();
 
-	var passedData = {};
-	supersonic.ui.views.current.params.onValue(function(data){
-		passedData = data;
-		$scope.otherPerson = passedData.otherPerson;
-	});
 
 	$scope.addMessage = function(){
-		console.log('Sending Message');
 		$scope.messages.$add({
-			sendID: uID,
-			rcID: passedData.otherPerson,
+			sendID: global.uid,
+			rcID: global.regID,
 			text: $scope.text,
 			time: Firebase.ServerValue.TIMESTAMP,
 		});
 	};
 	ref.on('child_added', function() {
-		
+		$scope.text = "";
 		updateMessages();
 	});
 
-	function updateMessages(){
 
+	function updateMessages(){
+		// supersonic.ui.dialog.alert("updating messages");
 		$scope.messages = $firebaseArray(ref);
 	}
 
 	// determine if individual messages are part of the dialogue
 	$scope.dialogueFilter = function(item){
-		//supersonic.ui.dialog.alert("comparing " + String(item.rcID) + " and " + String(item.sendID));
-		if ((item.rcID == uID) && (item.sendID == passedData.otherPerson)){return true;}
-		if ((item.rcID == passedData.otherPerson) && (item.sendID == uID)){return true;}
-		return false
+		// supersonic.ui.dialog.alert("uid: " + global.uid);
+		// supersonic.ui.dialog.alert("regID: " + global.regID);
+		// supersonic.ui.dialog.alert("rcID: " + item.rcID);
+		// supersonic.ui.dialog.alert("sendID: " + item.sendID);
+
+		// supersonic.ui.dialog.alert("comparing " + item.rcID + " and " + item.sendID);
+		if ((item.rcID == global.uid) && (item.sendID == global.regID)){return true;}
+		if ((item.rcID == global.regID) && (item.sendID == global.uid)){return true;}
+		return false;
 	}
 
-
-
-});
+}]);
 
 
 
