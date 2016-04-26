@@ -62,25 +62,45 @@
 
   <!-- message: {{message}} -->
   <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
-  <div>
+<!--   <div>
     <span ng-show="requestNumber"> Requests Number is : {{requestNumber}}</span>
-  </div>
+  </div> -->
 
 
-  <h3>Tutor Requests</h3>
+  <center><h3>Tutor Requests:</h3></center>
 
 
 <ul class = "list">
-  <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query" >{{card.food}} for {{card.subject}} at {{card.location}}
-     <p><input type ="checkbox" ng-model="show_detail"> View Details
-    <div ng-show="show_detail"></p>
-      <p>  <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}"> Student: {{card.name}},  Decription: {{card.description}}
-         </p>
-       </div>
-       <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>
-     </li></h4></i>
+  <h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {accepted : false} | filter : query" >
+  <div>
+      <span class="food">{{card.food}} </span> for 
+      <span class="subject"> {{card.subject}}</span> at 
+      <span class = "location">{{card.location}}</span>
+  </div>  
+  <p><input type ="checkbox" ng-model="show_detail"> View Details </p>
+  <div ng-show="show_detail"> 
+  <p>       <!-- This is user image-->
+    <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}"> 
+      <p><b>Student:</b> {{card.name}}</p>
+      <p><b>subject:</b> {{card.subject}}</p>
+      <p><b>Decription:</b> {{card.description}}</p> 
+      <p><b>Food:</b> {{card.food}}</p>
+      <p><b>location:</b> {{card.location}}</p>
+  </p>
+ </div>
+ <button class="button button-small button-positive" ng-click="accept(key)">Accept</button>
 
-   </ul>
+<!--      <p><input type ="checkbox" ng-model="show_detail"> View Details
+    <div ng-show="show_detail"></p>
+      <img style = "max-height: 50px"src="data:image/png;base64,{{card.userImg}}">  
+        <span class="detail_name">Student</span> 
+        <span class="detail_info"> {{card.name}}</span>
+        <span class= "detail_name">Decription</span> 
+        <span class= "detail_info">{{card.description}}</span></div> -->
+       
+     </li>
+   </h4>
+</ul>
 
   <!-- acceptRec is {{acceptRec}} -->
   <!-- message is {{message}} -->
