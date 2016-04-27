@@ -5,15 +5,17 @@
     <super-navbar-title>
       Profile
     </super-navbar-title>
+     <super-navbar-button side = "right">Edit Info
+    </super-navbar-button>
   </super-navbar>
 <!-- 	 <button class= "button" ng-click="takephoto()">Take a photo</button> -->
-	 <center><button class = "button" ng-click = "getImgFromLib()"> Update photo </button><br><br>
-	 <img src="data:image/png;base64,{{currentUser.img}}" height="150">
+	 <center><button class = "button" ng-click = "getImgFromLib()"> Update Picture </button><br><br>
+	 <img src="data:image/png;base64,{{currentUser.img}}" height="150" alt="No Profile Picture">
       <h2 class = "padding-vertical" >{{currentUser.firstname}} {{currentUser.lastname}}</h2>
 
    <p style="font-size:20px"><i class="icon super-star"></i>4.5/5<br>
    <i class="icon super-ios-book"></i> Computer Science<br>
-   <strong>Skills</strong>: Android development
+   <strong>Skills</strong>: Android Development
    <i class="icon super-social-android"></i>
    Angular JS
    <i class="icon super-social-angular"></i>
