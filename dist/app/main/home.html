@@ -41,8 +41,8 @@
     <super-navbar-title>
       Hungry Einstein
     </super-navbar-title>
-<!--     <super-navbar-button ng-click="logout()" side = "right">Logout
-    </super-navbar-button> -->
+    <super-navbar-button ng-click="logout()" side = "right">Logout
+    </super-navbar-button>
   </super-navbar>
 
 <!--   <div class="textintro" ng-show="currentUser">
@@ -52,6 +52,10 @@
     </center>
   </div> -->
 <body>
+
+  <div class="title"><center><h3>Tutor Requests<span class="badge" ng-show="requestNumber" >{{requestNumber}}</span>:</h3>
+  </center></div>
+
   <!-- search input-->
   <div class = "list list-inset search cf">
     <label class="item item-input" >
@@ -61,16 +65,13 @@
   </div>
 
   <!-- message: {{message}} -->
-  <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
+  <!-- *****showing all the list cards in 'cards/' that have not been accepted -->   
 
 
-   <div class="title"><center><h3>Tutor Requests <span class="badge" ng-show="requestNumber" >{{requestNumber}}</span>:</h3>
-  </center></div>
-
-
-<ul class = "userlist cf">
-  <h4><li class = " item item-button-right" ng-repeat = "(key, card) in allRequests | filter : query | filter: {accepted : false} " >
+<!-- <ul class = "userlist cf"> --> 
+  <h4><div class = "card" ng-repeat = "(key, card) in allRequests | filter : query | filter: {accepted : false} " >
   <div class= "request_info">
+      <i class = "icon super-pizza"> </i>
       <span >{{card.food}} </span>  for 
       <span > {{card.subject}}</span>  at 
       <span >{{card.location}}</span>
@@ -87,7 +88,7 @@
         <span class="col col-75">subject:{{card.subject}}</span>
       </div> -->
       <div class="row">
-        <span class="col col-75">Decription:{{card.description}}</span>
+        <span class="col col-75">Description:{{card.description}}</span>
       </div>
     <!--   <div class="row">
         <span class="col col-75">Food: {{card.food}}</span>
@@ -95,12 +96,26 @@
     </div>
 
   </div>
-        <button class="button button-small button-positive" style="margin-top:10px" ng-click="accept(key)">Accept</button>
+        <button style="float:right; margin-bottom: 25px" class="button button-outline button-balanced" ng-click="accept(key)">Accept</button>
 
-     </li>
+     </div>     
    </h4>
-</ul> 
+   
+<!-- </ul>  -->
+
 </body>
+
+<!-- <div class="card">
+  <div class="item item-divider">
+    I'm a Header in a Card!
+  </div>
+  <div class="item item-text-wrap">
+    This is a basic Card with some text.
+  </div>
+  <div class="item item-divider">
+    I'm a Footer in a Card!
+  </div>
+</div> -->
 
 
   <!-- acceptRec is {{acceptRec}} -->
@@ -108,7 +123,7 @@
   <!-- {{requetsAll}} -->
   <!-- {{test}} -->
   <super-navigate location="main#request" style="color:green">
-    <button  class="button button-full button-calm" >Find a Tutor</button>
+    <button  class="button button-full button-balanced" >Find a Tutor</button>
   </super-navigate>
 <!-- message : {{message}} -->
 </div>

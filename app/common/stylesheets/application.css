@@ -1,5 +1,5 @@
 .supersonic-navbar-mock {
-  background-color: #EF8FFD;
+  background-color: #006b00;
   text-align: center;
   font-weight: 600;
 }
@@ -33,7 +33,7 @@ fieldset {
   border-radius: 15px;
 }
 .search {
-  background: #F5F5F5;
+  background: #ffffff;
   width: 100%;
   margin: 0 auto;
   margin-top: 10px;
@@ -98,7 +98,7 @@ fieldset {
   /*border: 1px line transparent;*/
   opacity: .95;
   border-radius: 3px;
-  border: 1px solid  #E7A0FF;
+  border: 1px solid  #007a00;
   box-shadow: 0 1px 0 rgba(0,0,0,.25);
 
 }
@@ -145,7 +145,7 @@ fieldset {
   /*background: white;*/
 /*  width: 100%;
   max-width: 850px;*/
-  background-color: #E7A0FF; 
+  background-color: #ffffff; 
   margin-left: auto;
   margin-right: auto;
   /*padding: 10px 40px;*/
@@ -153,6 +153,6 @@ fieldset {
   /*position: relative;*/
   opacity: .95;
   border-radius: 3px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #4cb74c;
   box-shadow: 0 1px 0 rgba(0,0,0,.25);
 }
