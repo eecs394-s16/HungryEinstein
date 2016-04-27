@@ -5,6 +5,14 @@ main.controller('profile_controller',
 	var auth = $firebaseAuth(ref);
     // successfully login and extract login user's infomation
 
+  var global = {};
+  // onload, get passed in values
+  supersonic.ui.views.current.params.onValue(function(data){
+    global = data;
+    supersonic.ui.dialog.alert(data);
+  });
+
+
 	auth.$onAuth(function(authUser){
 		if (authUser){
 			var authRef = new Firebase(FIREBASE_URL + 'users/' + authUser.uid);

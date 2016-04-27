@@ -633,6 +633,14 @@ main.controller('home_controller',
 
            };
 
+            // when a conversation is selected,
+            // show that conversation
+            $scope.sendMessage = function(id){
+                  var view = new supersonic.ui.View("main#view_conversation");
+                  var infoForView = {regID: id};
+                  supersonic.ui.layers.push(view, {params: infoForView});
+            }
+
 		} // userAuthenticated
 	});  // onAuth
 }]);
@@ -778,6 +786,14 @@ main.controller('profile_controller',
 	var ref = new Firebase(FIREBASE_URL);
 	var auth = $firebaseAuth(ref);
     // successfully login and extract login user's infomation
+
+  var global = {};
+  // onload, get passed in values
+  supersonic.ui.views.current.params.onValue(function(data){
+    global = data;
+    supersonic.ui.dialog.alert(data);
+  });
+
 
 	auth.$onAuth(function(authUser){
 		if (authUser){
@@ -1065,6 +1081,7 @@ main.controller('view_conversation_controller',
 		tempuid = global.uid;
 		global = data;
 		global.uid = tempuid;
+		$scope.debug = data;
 	});
 
 	// messages stuff
@@ -1120,6 +1137,18 @@ main.controller('view_conversation_controller',
 		if ((item.rcID == global.uid) && (item.sendID == global.regID)){return true;}
 		if ((item.rcID == global.regID) && (item.sendID == global.uid)){return true;}
 		return false;
+	}
+
+	$scope.getMessageColor = function(item){
+		c = {
+			right: "rgb(174, 234, 174)",
+			left: "rgb(179, 230, 255)",
+		};
+		if (item.sendID == global.uid){
+			return c.right;
+		}
+		return c.left;
+		// return "yellow";
 	}
 
 }]);

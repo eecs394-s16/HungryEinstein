@@ -163,6 +163,14 @@ main.controller('home_controller',
 
            };
 
+            // when a conversation is selected,
+            // show that conversation
+            $scope.sendMessage = function(id){
+                  var view = new supersonic.ui.View("main#view_conversation");
+                  var infoForView = {regID: id};
+                  supersonic.ui.layers.push(view, {params: infoForView});
+            }
+
 		} // userAuthenticated
 	});  // onAuth
 }]);

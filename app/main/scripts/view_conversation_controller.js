@@ -7,6 +7,7 @@ main.controller('view_conversation_controller',
 		tempuid = global.uid;
 		global = data;
 		global.uid = tempuid;
+		$scope.debug = data;
 	});
 
 	// messages stuff
@@ -62,6 +63,18 @@ main.controller('view_conversation_controller',
 		if ((item.rcID == global.uid) && (item.sendID == global.regID)){return true;}
 		if ((item.rcID == global.regID) && (item.sendID == global.uid)){return true;}
 		return false;
+	}
+
+	$scope.getMessageColor = function(item){
+		c = {
+			right: "rgb(174, 234, 174)",
+			left: "rgb(179, 230, 255)",
+		};
+		if (item.sendID == global.uid){
+			return c.right;
+		}
+		return c.left;
+		// return "yellow";
 	}
 
 }]);

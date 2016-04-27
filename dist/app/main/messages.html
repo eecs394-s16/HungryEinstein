@@ -39,20 +39,13 @@
 
 <div ng-controller="messages_controller">
 
-<super-navbar >
-  <super-navbar-title>
-    Using the Scanner
-  </super-navbar-title>
-</super-navbar>
-
-
 	<super-navbar>
 		<super-navbar-title>
 			Conversations
 		</super-navbar-title>
 	</super-navbar>
 
-	debug: ->{{debug}}<-
+	<!-- debug: ->{{debug}}<- -->
 
 	<ul class="list">
 		<li class="item item-avatar" ng-repeat="item in users | filter:convoFilter" ng-click="viewConversation(item)">
