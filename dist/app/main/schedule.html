@@ -143,7 +143,7 @@
 
     <!-- </p> -->
     <super-navigate location="main#tutorProfile">
-      <button class ="button button-small button-balanced" ng-click="viewTutorProfile(card)">View Student Profile </button>
+      <button class ="button button-small button-balanced" ng-click="viewTutorProfile(card)">View Student Profile</button>
     </super-navigate>
     <!-- <super-navigate location="main#view_conversation"> -->
       <button class ="button button-small button-calm" ng-click="sendMessage(card.userID)">Message Student</button>
@@ -161,7 +161,7 @@
 <h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: false}"><span class="imp_date">{{card.dateExp}}</span>
   <!-- <p><button type = "button">Cancel</button></p> -->
   <p align>
-    <input class="checkB"type ="checkbox" ng-model="show_detail"> View Details
+    <input class="checkB"type ="checkbox" ng-model="show_detail">View Details
   </p>
   <div ng-show="show_detail">
     <p>
@@ -178,7 +178,7 @@
 <ul class = "list">
 <h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}">{{card.subject}}
   <p>
-    <input class="checkB"type ="checkbox" ng-model="show_detail"> Rate your Tutor 
+    <input class="checkB"type ="checkbox" ng-model="show_detail">Rate your Tutor 
   </p>
   <div ng-show="show_detail">
     <div class="list">

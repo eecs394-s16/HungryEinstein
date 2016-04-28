@@ -957,7 +957,7 @@ main.controller('request_controller',
 
 				}).then(function(){
 
-					$scope.message = "add request successfully!";
+					$scope.message = "added request successfully!";
 				    $scope.requester_name= '';
 					$scope.request_subject ='';
 					$scope.request_expiry ='';
@@ -976,7 +976,7 @@ main.controller('request_controller',
 
 					// supersonic.ui.modal.show(modalView, options);
 					// reloadpage();
-					supersonic.ui.dialog.alert("Submit successfully!");
+					supersonic.ui.dialog.alert("Submitted successfully!");
 
 					
 				});
@@ -989,7 +989,7 @@ main.controller('request_controller',
 	        }
 
 	        $scope.logout = function(){
-				$scope.message = "successfully logout!";
+				$scope.message = "successfully logged out!";
 				supersonic.ui.initialView.show();
 				return auth.$unauth();
 	        };

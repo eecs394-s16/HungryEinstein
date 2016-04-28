@@ -26,17 +26,17 @@
   <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
 
 
-   <div class="title"><center><h3>Tutor Requests <span class="badge" ng-show="requestNumber" >{{requestNumber}}</span>:</h3>
-  </center></div>
+  <div class="title"><center><h3>
+    Tutor Requests
+  </h3></center></div>
 
 
 <ul class = "userlist cf">
   <h4><li class = " item item-button-right" ng-repeat = "(key, card) in allRequests | filter : query | filter: {accepted : false} " >
   <div class= "request_info">
-    
-      <span >{{card.food}} </span>  for 
-      <span > {{card.subject}}</span>  at 
-      <span >{{card.location}}</span>
+    <b>{{card.food}}</b> for 
+    <b>{{card.subject}}</b> at 
+    <b>{{card.location}}</b>
   </div>  
   <input style="float:left; margin-left: 10px"type ="checkbox" ng-model="show_detail"> <span class="checkB">View Details</span>
   <div class="row card" ng-show="show_detail"> 
@@ -44,14 +44,14 @@
     <img class="col col-33" style = "max-height: 80px"src="data:image/png;base64,{{card.userImg}}"> 
     <div class="col col-75">
       <div class="row">
-        <span class="col col-75"><span class="guide_info"> Student: </span>  <span class="imp_info">{{card.name}}</span></span> 
+        <span class="col col-75"><span class="guide_info">Student: </span><span class="imp_info">{{card.name}}</span></span> 
       </div>
      <!--  <div class= "row">
         <span class="col col-75">subject:{{card.subject}}</span>
       </div> -->
       <div class="row">
         <span class="col col-75"> 
-         <span class="guide_info">Decription: </span> 
+         <span class="guide_info">Description: </span> 
         <span class="imp_info">{{card.description}}</span></span>
       </div>
     <!--   <div class="row">
