@@ -138,7 +138,7 @@
 
 <h5> Hey {{ currentUser.firstname }}, these are appointments you attended. Rate your tutor!</h5>
 <ul class = "list">
-<h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}">{{card.subject}}
+<h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true, rated: false}">{{card.subject}}
   <p>
     <input class="checkB"type ="checkbox" ng-model="show_detail">Rate your Tutor 
   </p>
@@ -157,7 +157,7 @@
         </select>
       </label>
     </div>
-    <button class ="button button-small button-royal" ng-click="updateRating()">
+    <button class ="button button-small button-royal" ng-click="updateRating(card)">
       Submit Rating
     </button>
   </div>

@@ -134,9 +134,12 @@ main.controller('home_controller',
 				return auth.$unauth();
 	     };
 
-            $scope.updateRating = function(){
+            $scope.updateRating = function(card){
                   supersonic.ui.dialog.alert("Rating Successfully Submitted!")
+                  rated = true;
+                  allRequests.$remove(card).then(function(ref){
 
+                  });                 
            };
 
             // when a conversation is selected,
