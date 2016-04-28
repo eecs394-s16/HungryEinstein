@@ -930,12 +930,12 @@ main.controller('request_controller',
             var refRequest = new Firebase(FIREBASE_URL + 'requests/');
             var requestsInfoAll = $firebaseArray(refRequest);
 
-			var modalView1 = new supersonic.ui.View("main#home");
-			var options = {
-				animate: true
-				}
-			// var view = new supersonic.ui.View("bananas#show");
-			supersonic.ui.layers.push(modalView1);	
+			// var modalView1 = new supersonic.ui.View("main#home");
+			// var options = {
+			// 	animate: true
+			// 	}
+			// // var view = new supersonic.ui.View("bananas#show");
+			// supersonic.ui.layers.push(modalView1);	
 			// var record2 = userObj;
 			// $rootScope.message2 = authUser.uid;
 

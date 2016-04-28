@@ -63,7 +63,9 @@ tab-bar tab-bar-item marker-top:selected {
 tab-bar-item#settings {
   background-image: url(icons/cog.svg);
 }
-
+tab-bar-item#request{
+  background-image: url(icons/book.svg);
+}
 tab-bar-item#index {
   background-image: url(icons/home.svg);
 }
@@ -78,6 +80,7 @@ tab-bar-item#home {
 
 tab-bar-item#messages {
   background-image: url(icons/web.svg);
+  background-size: cover;
 }
 
 tab-bar-item#schedule {
@@ -86,4 +89,5 @@ tab-bar-item#schedule {
 
 tab-bar-item#profile {
   background-image: url(icons/people.svg);
+  background-size: contain;
 }
