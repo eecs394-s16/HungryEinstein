@@ -48,14 +48,10 @@
 <!--   <div class="textintro" ng-show="currentUser">
     <center>
       <h2 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h2>
-      <!--         <h2 class = "padding-vertical" >Here are the current listings: </h2> 
+      <!         <h2 class = "padding-vertical" >Here are the current listings: </h2> 
     </center>
   </div> -->
 <body>
-
-  <div class="title"><center><h3>Tutor Requests<span class="badge" ng-show="requestNumber" >{{requestNumber}}</span>:</h3>
-  </center></div>
-
   <!-- search input-->
   <div class = "list list-inset search cf">
     <label class="item item-input" >
@@ -65,13 +61,17 @@
   </div>
 
   <!-- message: {{message}} -->
-  <!-- *****showing all the list cards in 'cards/' that have not been accepted -->   
+  <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
 
 
-<!-- <ul class = "userlist cf"> --> 
-  <h4><div class = "card" ng-repeat = "(key, card) in allRequests | filter : query | filter: {accepted : false} " >
+   <div class="title"><center><h3>Tutor Requests <span class="badge" ng-show="requestNumber" >{{requestNumber}}</span>:</h3>
+  </center></div>
+
+
+<ul class = "userlist cf">
+  <h4><li class = " item item-button-right" ng-repeat = "(key, card) in allRequests | filter : query | filter: {accepted : false} " >
   <div class= "request_info">
-      <i class = "icon super-pizza"> </i>
+    
       <span >{{card.food}} </span>  for 
       <span > {{card.subject}}</span>  at 
       <span >{{card.location}}</span>
@@ -82,13 +82,15 @@
     <img class="col col-33" style = "max-height: 80px"src="data:image/png;base64,{{card.userImg}}"> 
     <div class="col col-75">
       <div class="row">
-        <span class="col col-75"> <span class="guideInfo">Student</span> {{card.name}}</span> 
+        <span class="col col-75"><span class="guide_info"> Student: </span>  <span class="imp_info">{{card.name}}</span></span> 
       </div>
      <!--  <div class= "row">
         <span class="col col-75">subject:{{card.subject}}</span>
       </div> -->
       <div class="row">
-        <span class="col col-75">Description:{{card.description}}</span>
+        <span class="col col-75"> 
+         <span class="guide_info">Decription: </span> 
+        <span class="imp_info">{{card.description}}</span></span>
       </div>
     <!--   <div class="row">
         <span class="col col-75">Food: {{card.food}}</span>
@@ -96,15 +98,12 @@
     </div>
 
   </div>
-        <button style="float:right; margin-bottom: 25px; margin-right:10px" class="button button-outline button-balanced" ng-click="accept(key)">Accept</button>
+        <button class="button button-small button-balanced" style="margin-top:10px" ng-click="accept(card)">Accept</button>
 
-     </div>     
+     </li>
    </h4>
-   
-<!-- </ul>  -->
-
+</ul> 
 </body>
-
 <!-- <div class="card">
   <div class="item item-divider">
     I'm a Header in a Card!
@@ -122,9 +121,9 @@
   <!-- message is {{message}} -->
   <!-- {{requetsAll}} -->
   <!-- {{test}} -->
-  <super-navigate location="main#request" style="color:green">
+<!--   <super-navigate location="main#request" style="color:green">
     <button  class="button button-full button-balanced" >Find a Tutor</button>
-  </super-navigate>
+  </super-navigate> -->
 <!-- message : {{message}} -->
 </div>
 

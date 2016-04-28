@@ -539,42 +539,18 @@ main.controller('home_controller',
             // };
             });// $load
 
-			// }
-            angular.forEach(allRequests, function(value, key){
-                        // travese all requests
-                              // if(value.accepted == false){
-                              //       requestUnaccepted.push(value);
-                              //       // $scope.acceptRec = value;
-                              //       // requestsNum = requestNum + 1;
-                              //       requestUnacceptedKey.push(value.$id);
-                              // }
-
-                              // update all imgs belong to this user account
-                              if(value.userID == authUser.uid) {
-                                    value.userImg = userArray.$getRecord("img").$value;
-
-                              }
-                              if(value.tutorID == authUser.uid) {
-                                    value.tutorImg = userArray.$getRecord("img").$value;
-                              }
-                             allRequests.$save(value).then(function(ref){
-
-                             });
-                        // angular.forEach(value, function(value, key){
-                        // });
-                  });
             // $scope.requestUnaccepted = requestUnaccepted;
     //      // $scope.requestNumber = requestNumber;
             $scope.allRequests = allRequests;
     //         // // $scope.requestsAll = allRequests;
-            $scope.accept = function(index){
+            $scope.accept = function(card){
 
-            	var firebID = requestUnacceptedKey[index];
+            	// var firebID = requestUnacceptedKey[index];
 
-            	var record = allRequests.$getRecord(firebID);
-            	record.accepted = true;
-                  record.tutorID = $rootScope.currentUser.$id;
-                  record.tutorImg = $rootScope.currentUser.img;
+            	// var record = allRequests.$getRecord(firebID);
+            	card.accepted = true;
+                  card.tutorID = $rootScope.currentUser.$id;
+                  card.tutorImg = $rootScope.currentUser.img;
                   // $scope.message = $rootScope.currentUser.$id;
                   // $scope.myDate = record.dateExp;
                   // $scope.message  = myDate
@@ -582,9 +558,9 @@ main.controller('home_controller',
 
 
 
-            	allRequests.$save(record).then(function(){
+            	allRequests.$save(card).then(function(){
                         $scope.message = "go accepted";
-            		requestUnacceptedKey.splice(index, 1);
+            		// requestUnacceptedKey.splice(index, 1);
             	});
 
 
@@ -976,7 +952,7 @@ main.controller('request_controller',
 		            accepted: false,
 					userID: authUser.uid,
 					tutorID: '',
-					userImg: '',
+					userImg: $rootScope.currentUser.img,
 					tutorImg: ''
 
 				}).then(function(){
@@ -993,13 +969,14 @@ main.controller('request_controller',
 					// supersonic.ui.model.hide();
 					
 
-					var modalView = new supersonic.ui.View("main#home");
-					var options = {
-					  animate: true
-					}
+					// var modalView = new supersonic.ui.View("main#home");
+					// var options = {
+					//   animate: true
+					// }
 
-					supersonic.ui.modal.show(modalView, options);
+					// supersonic.ui.modal.show(modalView, options);
 					// reloadpage();
+					supersonic.ui.dialog.alert("Submit successfully!");
 
 					
 				});

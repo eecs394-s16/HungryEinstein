@@ -15,6 +15,11 @@ module.exports =
       location: "main#messages"
     }
     {
+      title: "Request"
+      id: "request"
+      location: "main#request"
+    }
+    {
       title: "Schedule"
       id: "schedule"
       location: "main#schedule"

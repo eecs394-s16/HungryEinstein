@@ -40,7 +40,7 @@ main.controller('request_controller',
 		            accepted: false,
 					userID: authUser.uid,
 					tutorID: '',
-					userImg: '',
+					userImg: $rootScope.currentUser.img,
 					tutorImg: ''
 
 				}).then(function(){
@@ -57,13 +57,14 @@ main.controller('request_controller',
 					// supersonic.ui.model.hide();
 					
 
-					var modalView = new supersonic.ui.View("main#home");
-					var options = {
-					  animate: true
-					}
+					// var modalView = new supersonic.ui.View("main#home");
+					// var options = {
+					//   animate: true
+					// }
 
-					supersonic.ui.modal.show(modalView, options);
+					// supersonic.ui.modal.show(modalView, options);
 					// reloadpage();
+					supersonic.ui.dialog.alert("Submit successfully!");
 
 					
 				});

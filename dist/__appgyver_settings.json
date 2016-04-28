@@ -19,12 +19,18 @@
     },
     {
       "position": 2,
+      "id": "request",
+      "title": "Request",
+      "target_url": "http://localhost/app/main/request.html"
+    },
+    {
+      "position": 3,
       "id": "schedule",
       "title": "Schedule",
       "target_url": "http://localhost/app/main/schedule.html"
     },
     {
-      "position": 3,
+      "position": 4,
       "id": "profile",
       "title": "Profile",
       "target_url": "http://localhost/app/main/profile.html"
